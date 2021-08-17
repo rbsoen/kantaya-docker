@@ -2,7 +2,9 @@
 
 ![](doc/screenshot.png)
 
-**Kantaya (Kantor Maya)** merupakan aplikasi web berbasis PHP yang dibuat oleh P3TIE-BPPT pada tahun 2001, dan secara resmi dirilis tanggal 26 Februari 2002, bersamaan dengan WinBI (sebuah distro Linux berbasis Trustix Merdeka) dan SITI[1]. Kantaya dan WinBI sempat tersedia di website SoftwareRI[2], yang sayangnya mengusang sekitar pertengahan tahun 2000-an. Dari kedua teknologi yang tersedia di website ini, hanya aplikasi Kantaya yang saya dapat temukan secara utuh, sebab software ini sempat diposting ulang di website lain (meski kini usang pula).
+**Kantaya (Kantor Maya)** merupakan aplikasi web berbasis PHP yang dibuat oleh P3TIE-BPPT pada tahun 2001, dan secara resmi dirilis tanggal 26 Februari 2002, bersamaan dengan WinBI (sebuah distro Linux berbasis Trustix Merdeka) dan SITI [[1]](http://web.archive.org/web/20020328092129/http://www.inn.bppt.go.id:80/). Kantaya dan WinBI sempat tersedia di website SoftwareRI [[2]](http://web.archive.org/web/20051201065926/http://www.software-ri.or.id/), yang sayangnya mengusang sekitar pertengahan tahun 2000-an.
+
+Dari kedua teknologi yang tersedia di website ini, hanya aplikasi Kantaya yang saya dapat temukan secara utuh, sebab software ini sempat diposting ulang di website lain (meski kini usang pula).
 
 Deskripsi resmi Kantaya menyebutnya sebagai aplikasi *groupware*, yang ditujukan untuk organisasi, perusahaan dan situasi yang memerlukan kolaborasi. Kantaya terdiri dari beberapa modul yang analogis dengan perkakas kantor yang sebenarnya, yaitu:
 
@@ -27,7 +29,9 @@ Proyek ini dimaksudkan untuk melestarikan (preserving) usaha-usaha awal berkarya
 
 ## Setup
 
-Repo ini digunakan dengan `docker-compose`. Lingkungan yang digunakan adalah MySQL 5.7, PHP 4.4, Apache 2.2 (image yang digunakan: [3])
+Repo ini digunakan dengan `docker-compose`.
+
+Lingkungan yang digunakan adalah MySQL 5.7, PHP 4.4, Apache 2.2 (image yang digunakan: [[3]](https://hub.docker.com/r/nouphet/docker-php4/))
 
 1. Untuk memulai server, cukup ketik `docker-compose up` pada terminal.
 2. Setelah container-container telah siap semua, bukalah `http://localhost:8000/setup/SETUP.PHP` dalam browser. Akan muncul form setup dengan beberapa entri yang telah terisi. Cukup isi password untuk MySql Admin (lihat `MYSQL_ROOT_PASSWORD` dalam `docker-compose.yml`), password untuk Database User (lihat `MYSQL_PASSWORD` dalam `docker-compose.yml`), serta semua isian dalam Profile Instansi.
@@ -54,7 +58,3 @@ Fitur-fitur yang telah diperbaiki:
 - [ ] Surat
 - [ ] URL Link
 - [ ] Profil Pengguna
-
-[1](http://web.archive.org/web/20020328092129/http://www.inn.bppt.go.id:80/)
-[2](http://web.archive.org/web/20051201065926/http://www.software-ri.or.id/)
-[3](https://hub.docker.com/r/nouphet/docker-php4/)
