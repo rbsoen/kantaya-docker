@@ -1,0 +1,37 @@
+version: "3.9"
+    
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: kantaya
+      MYSQL_USER: kantaya
+      MYSQL_PASSWORD: kantaya
+    
+  kantaya:
+    depends_on:
+      - db
+    build: .
+    volumes:
+      - kantaya_db:/var/www/html/cfg
+    ports:
+      - "8000:80"
+    restart: always
+  
+  phpma:
+    image: phpmyadmin
+    depends_on:
+      - db
+    restart: always
+    ports:
+      - "8001:80"
+    environment:
+      - PMA_ARBITRARY=1
+volumes:
+  db_data: {}
+  kantaya_db: {}
+

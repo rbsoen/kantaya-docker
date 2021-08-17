@@ -1,0 +1,427 @@
+--- Kantaya-Original/setup/post_setup.php	2001-11-30 22:13:24.000000000 +0700
++++ Kantaya/setup/post_setup.php	2021-08-17 19:30:32.482880591 +0700
+@@ -16,6 +16,27 @@
+ echo "</tr>\n";
+ echo "</table><br>\n";
+ 
++$host = $_POST['host'];
++$root = $_POST['root'];
++$password = $_POST['password'];
++
++$nama_user = $_POST['nama_user'];
++$pswd_user = $_POST['pswd_user'];
++$nama_database = $_POST['nama_database'];
++
++$nama_perusahaan = $_POST['nama_perusahaan'];
++$alamat_perusahaan = $_POST['alamat_perusahaan'];
++$telp_perusahaan = $_POST['telp_perusahaan'];
++$fax_perusahaan = $_POST['fax_perusahaan'];
++$email_perusahaan = $_POST['email_perusahaan'];
++$url_perusahaan = $_POST['url_perusahaan'];
++
++$logo_perusahaan = $_FILES['logo_perusahaan'];
++$logo_perusahaan_type = $logo_perusahaan['type'];
++$logo_perusahaan_name = $logo_perusahaan['name'];
++
++$basepath = $_POST['basepath'];
++
+ $link = mysql_connect($host,$root,$password) or die('Tidak dapat Koneksi Ke $root@$host<br>');
+ echo "Koneksi Ke $root@$host Sukses<br>\n";
+ 
+@@ -55,10 +76,10 @@
+     tampilkan_error('',$errtext);
+ }
+ 
+-if (!is_uploaded_file($logo_perusahaan)) {
++/*if (!is_uploaded_file($logo_perusahaan)) {
+     $errtext = "File Logo tidak dapat diupload";
+     tampilkan_error('',$errtext);
+-}
++}*/
+ 
+ if (!is_writable("/$basepath/cfg")) {
+     chmod("/$basepath/cfg", 0755);
+@@ -69,32 +90,32 @@
+     tampilkan_error('',$errtext);
+ }
+ 
+-echo "Pembuatan Mysql User : $nama_user dengan lokasi $host<br>\n";
++/*echo "Pembuatan Mysql User : $nama_user dengan lokasi $host<br>\n";
+ create_mysqluser($link, $nama_user, $pswd_user, $host);
+ 
+ echo "Pembuatan Mysql User Priviledges<br>\n";
+ create_user_priv($nama_user, $host, $nama_database);
+-
++*/
+ mysql_close($link);
+ 
+ $link = mysql_connect($host,$nama_user,$pswd_user) or die('Tidak dapat Koneksi ke $nama_user@$host<br>');
+ echo "Koneksi Ke $nama_user@$host Sukses<br>\n";
+ 
+-echo "Pembuatan Mysql Kanataya Database : $nama_database<br>\n";
++/*echo "Pembuatan Mysql Kanataya Database : $nama_database<br>\n";
+ create_mysqldb($nama_database);
+-
++*/
+ echo "Pembuatan Table-Table Kantaya<br>\n";
+ create_table_kantaya($nama_database);
+ 
+ echo "Insert Profile Perusahaan<br>\n";
+ insert_profile_perusahaan();
+ 
+-echo "Insert Unit Kerja<br>\n";
+-insert_unit_kerja();
+-
+ echo "Insert Administrator<br>\n";
+ insert_admin();
+ 
++echo "Insert Unit Kerja<br>\n";
++insert_unit_kerja();
++
+ echo "Pembuatan Konfigurasi File<br>\n";
+ create_dbconfig_file($nama_user, $pswd_user, $host, $nama_database);
+ 
+@@ -214,7 +235,7 @@
+     $delete = mysql_query($sqldelete, $link);
+     check_mysql_error(mysql_errno(),mysql_error());
+     $sqlinsert = "insert into profile_perusahaan(nama_perusahaan, alamat, telp, fax, email, url, logo, tanggal_dibuat, dibuat_oleh) ";
+-    $sqlinsert .= "values('$nama_perusahaan','$alamat_perusahaan','$telp_perusahaan','$fax_perusahaan','$email_perusahaan', '$url_perusahaan', '$logo_file', now(), '1')";
++    $sqlinsert .= "values('$nama_perusahaan','$alamat_perusahaan','$telp_perusahaan','$fax_perusahaan','$email_perusahaan', '$url_perusahaan', '$logo_file', now(), 1)";
+     $insert = mysql_query($sqlinsert, $link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ }
+@@ -222,7 +243,7 @@
+ function insert_unit_kerja() {
+     global $nama_perusahaan, $link;
+     $sqlinsert = "insert into unit_kerja(kode_unit, nama_unit, tanggal_dibuat, dibuat_oleh) ";
+-    $sqlinsert .= "values('0000000000', '$nama_perusahaan', now(), '1')";
++    $sqlinsert .= "values('0000000000', '$nama_perusahaan', now(), 1)";
+     $insert = mysql_query($sqlinsert, $link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ }
+@@ -230,7 +251,7 @@
+ function insert_admin() {
+     global $link;
+     $sqlinsert = "insert into pengguna(nama_pengguna, level, username, password, unit_kerja, tanggal_dibuat, dibuat_oleh) ";
+-    $sqlinsert .= "values('Administrator', '1', 'administrator', 'root', '0000000000', now(), '1')";
++    $sqlinsert .= "values('Administrator', '1', 'administrator', 'root', '0000000000', now(), 1)";
+     $insert = mysql_query($sqlinsert, $link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ }
+--- Kantaya-Original/setup/tbl_admin.php	2001-11-30 22:13:24.000000000 +0700
++++ Kantaya/setup/tbl_admin.php	2021-08-17 19:08:10.105343711 +0700
+@@ -24,7 +24,7 @@
+                        
+     echo "create table pengguna<br>\n";
+     $sqltext = "create table pengguna (
+-                       kode_pengguna    int(10)         NOT NULL DEFAULT '0' AUTO_INCREMENT,
++                       kode_pengguna    int(10)         NOT NULL AUTO_INCREMENT,
+                        nip              varchar(25),
+                        nama_pengguna    varchar(100)    NOT NULL,
+                        level            char(1)         NOT NULL,
+@@ -48,14 +48,14 @@
+                        diubah_oleh      int(10),
+                        keterangan       varchar(120),
+                        PRIMARY KEY (kode_pengguna),
+-                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna,
+-                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna)";
++                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+     echo "create table unit_kerja<br>\n";
+     $sqltext = "create table unit_kerja (
+-                       kode_unit        varchar(10)     NOT NULL,
++                       kode_unit        int(10)     NOT NULL,
+                        nama_unit        varchar(100)    NOT NULL,
+                        singkatan_unit   varchar(10),
+                        induk_unit       varchar(10),
+@@ -65,14 +65,14 @@
+                        diubah_oleh      int(10),
+                        keterangan       varchar(120),
+                        PRIMARY KEY (kode_unit),
+-                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna,
+-                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna)";
++                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+     echo "create table grup<br>\n";
+     $sqltext = "create table grup (
+-                       kode_grup        int(10)         NOT NULL DEFAULT '0' AUTO_INCREMENT,
++                       kode_grup        int(10)         NOT NULL AUTO_INCREMENT,
+                        nama_grup        varchar(50)     NOT NULL,
+                        sifat_grup       varchar(9)      NOT NULL,
+                        pimpinan_grup    int(10),
+@@ -83,9 +83,9 @@
+                        keterangan       varchar(120),
+                        status           char(1),
+                        PRIMARY KEY (kode_grup),
+-                       FOREIGN KEY (pimpinan_grup) REFERENCES pengguna,
+-                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna,
+-                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna)";
++                       FOREIGN KEY (pimpinan_grup) REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+@@ -95,11 +95,12 @@
+                        kode_grup        int(10)         NOT NULL,
+                        tanggal_dibuat   date            NOT NULL,
+                        dibuat_oleh      int(10),
++                       diubah_oleh      int(10),
+                        PRIMARY KEY (kode_pengguna, kode_grup),
+-                       FOREIGN KEY (kode_pengguna) REFERENCES pengguna,
+-                       FOREIGN KEY (kode_grup) REFERENCES grup,
+-                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna,
+-                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna)";
++                       FOREIGN KEY (kode_pengguna) REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY (kode_grup) REFERENCES grup(kode_grup),
++                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+--- Kantaya-Original/setup/tbl_agenda.php	2001-11-30 22:13:24.000000000 +0700
++++ Kantaya/setup/tbl_agenda.php	2021-08-17 19:07:52.575212542 +0700
+@@ -8,7 +8,7 @@
+ 
+     echo "create table agenda<br>\n";
+     $sqltext = "create table agenda (
+-                       kode_agenda        int(10)         NOT NULL AUTO_INCREMENT DEFAULT '0',
++                       kode_agenda        int(10)         NOT NULL AUTO_INCREMENT,
+                        pemilik            int(10)         NOT NULL,
+                        judul              varchar(80)     NOT NULL,
+                        tipe               varchar(15)     NOT NULL,
+@@ -22,7 +22,7 @@
+                        sharing_publik     char(1)         NOT NULL,
+                        sifat_sharing      char(1),
+                        PRIMARY KEY (kode_agenda),
+-                       FOREIGN KEY (pemilik) REFERENCES pengguna)";
++                       FOREIGN KEY (pemilik) REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+@@ -49,7 +49,7 @@
+                        tgl_dibuat         date            NOT NULL,
+                        tgl_diubah         date,
+                        PRIMARY KEY (kode_dikerjakan),
+-                       FOREIGN KEY (pemilik) REFERENCES pengguna)";
++                       FOREIGN KEY (pemilik) REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+@@ -59,8 +59,8 @@
+                        kode_grup          int(10)         NOT NULL,
+                        tgl_dibuat         date            NOT NULL,
+                        PRIMARY KEY (kode_agenda, kode_grup),
+-                       FOREIGN KEY (kode_agenda) REFERENCES agenda,
+-                       FOREIGN KEY (kode_grup) REFERENCES grup)";
++                       FOREIGN KEY (kode_agenda) REFERENCES agenda(kode_agenda),
++                       FOREIGN KEY (kode_grup) REFERENCES grup(kode_grup))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+@@ -70,8 +70,8 @@
+                        kode_pengguna      int(10)         NOT NULL,
+                        tgl_dibuat         date            NOT NULL,
+                        PRIMARY KEY (kode_agenda, kode_pengguna),
+-                       FOREIGN KEY (kode_agenda) REFERENCES agenda,
+-                       FOREIGN KEY (kode_pengguna) REFERENCES pengguna)";
++                       FOREIGN KEY (kode_agenda) REFERENCES agenda(kode_agenda),
++                       FOREIGN KEY (kode_pengguna) REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+@@ -81,8 +81,8 @@
+                        kode_unit int(10) NOT NULL,
+                        tgl_dibuat date NOT NULL,
+                        PRIMARY KEY (kode_agenda, kode_unit),
+-                       FOREIGN KEY (kode_agenda) REFERENCES agenda,
+-                       FOREIGN KEY (kode_unit) REFERENCES unit_kerja)";
++                       FOREIGN KEY (kode_agenda) REFERENCES agenda(kode_agenda),
++                       FOREIGN KEY (kode_unit) REFERENCES unit_kerja(kode_unit))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+@@ -92,8 +92,8 @@
+                        kode_grup          int(10)         NOT NULL,
+                        tgl_dibuat         date            NOT NULL,
+                        PRIMARY KEY (kode_agenda, kode_grup),
+-                       FOREIGN KEY (kode_agenda) REFERENCES agenda,
+-                       FOREIGN KEY (kode_grup) REFERENCES grup)";
++                       FOREIGN KEY (kode_agenda) REFERENCES agenda(kode_agenda),
++                       FOREIGN KEY (kode_grup) REFERENCES grup(kode_grup))";
+ 
+     echo "create table undangan_pengguna<br>\n";
+     $sqltext = "create table undangan_pengguna (
+@@ -103,8 +103,8 @@
+                        alasan             varchar(120),
+                        tgl_dibuat         date            NOT NULL,
+                        PRIMARY KEY (kode_agenda, kode_pengguna),
+-                       FOREIGN KEY (kode_agenda) REFERENCES agenda,
+-                       FOREIGN KEY (kode_pengguna) REFERENCES pengguna)";
++                       FOREIGN KEY (kode_agenda) REFERENCES agenda(kode_agenda),
++                       FOREIGN KEY (kode_pengguna) REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+@@ -114,8 +114,8 @@
+                        kode_unit          int(10)         NOT NULL,
+                        tgl_dibuat         date            NOT NULL,
+                        PRIMARY KEY (kode_agenda, kode_unit),
+-                       FOREIGN KEY (kode_agenda) REFERENCES agenda,
+-                       FOREIGN KEY (kode_unit) REFERENCES unit_kerja)";
++                       FOREIGN KEY (kode_agenda) REFERENCES agenda(kode_agenda),
++                       FOREIGN KEY (kode_unit) REFERENCES unit_kerja(kode_unit))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+--- Kantaya-Original/setup/tbl_dimana.php	2001-11-30 22:13:24.000000000 +0700
++++ Kantaya/setup/tbl_dimana.php	2021-08-17 18:24:19.054202679 +0700
+@@ -16,8 +16,8 @@
+                        dibuat_oleh	      INT(10),
+                        diubah_oleh        INT(10),
+                        PRIMARY KEY	(kode_pengguna),
+-                       FOREIGN KEY	(dibuat_oleh)	REFERENCES pengguna,
+-                       FOREIGN KEY	(diubah_oleh)	REFERENCES pengguna)";
++                       FOREIGN KEY	(dibuat_oleh)	REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY	(diubah_oleh)	REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+--- Kantaya-Original/setup/tbl_fasilitas.php	2001-11-30 22:13:24.000000000 +0700
++++ Kantaya/setup/tbl_fasilitas.php	2021-08-17 19:09:57.546112752 +0700
+@@ -21,8 +21,8 @@
+                        dibuat_oleh        INT(10),
+                        diubah_oleh        INT(10),
+                        PRIMARY KEY	(kode_fas),
+-                       FOREIGN KEY	(dibuat_oleh)	REFERENCES pengguna,
+-                       FOREIGN KEY	(diubah_oleh)	REFERENCES pengguna)";
++                       FOREIGN KEY	(dibuat_oleh)	REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY	(diubah_oleh)	REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+@@ -43,11 +43,11 @@
+                        dibuat_oleh        INT(10),
+                        diubah_oleh        INT(10),
+                        PRIMARY KEY	(kode_pesan),
+-                       FOREIGN KEY	(fasilitas)	  REFERENCES fasilitas,
+-                       FOREIGN KEY	(pemesan)     REFERENCES pengguna,
+-                       FOREIGN KEY	(kode_agenda) REFERENCES agenda,
+-                       FOREIGN KEY	(dibuat_oleh) REFERENCES pengguna,
+-                       FOREIGN KEY	(diubah_oleh) REFERENCES pengguna)";
++                       FOREIGN KEY	(fasilitas)	  REFERENCES fasilitas(kode_fas),
++                       FOREIGN KEY	(pemesan)     REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY	(kode_agenda) REFERENCES agenda(kode_agenda),
++                       FOREIGN KEY	(dibuat_oleh) REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY	(diubah_oleh) REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+--- Kantaya-Original/setup/tbl_lemari.php	2001-11-30 22:13:24.000000000 +0700
++++ Kantaya/setup/tbl_lemari.php	2021-08-17 19:12:35.007149324 +0700
+@@ -8,7 +8,7 @@
+ 
+     echo "create table direktori<br>\n";
+     $sqltext = "create table direktori (
+-                       kode_direktori     int(10)         NOT NULL DEFAULT '0' AUTO_INCREMENT,
++                       kode_direktori     int(10)         NOT NULL AUTO_INCREMENT,
+                        nama_direktori     varchar(30)     NOT NULL,
+                        direktori_induk    int(10),
+                        keterangan         varchar(120),
+@@ -16,16 +16,17 @@
+                        tanggal_dibuat     date            NOT NULL,
+                        tanggal_diubah     date,
+                        dibuat_oleh        int(10)         NOT NULL,
++                       pemilik        int(10)         NOT NULL,
+                        diubah_oleh        int(10),
+                        PRIMARY KEY (kode_direktori),
+-                       FOREIGN KEY (direktori_induk) REFERENCES direktori ON DELETE cascade,
+-                       FOREIGN KEY (pemilik) REFERENCES pengguna ON DELETE cascade)";
++                       FOREIGN KEY (direktori_induk) REFERENCES direktori(kode_direktori) ON DELETE cascade,
++                       FOREIGN KEY (pemilik) REFERENCES pengguna(kode_pengguna) ON DELETE cascade)";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+     echo "create table file_tb<br>\n";
+     $sqltext = "create table file_tb (
+-                       kode_file          int(10)         NOT NULL DEFAULT '0' AUTO_INCREMENT,
++                       kode_file          int(10)         NOT NULL AUTO_INCREMENT,
+                        nama_file          varchar(30)     NOT NULL,
+                        ukuran_file        int(10)         NOT NULL,
+                        kata_kunci         varchar(60),
+@@ -37,7 +38,7 @@
+                        dibuat_oleh        int(10)         NOT NULL,
+                        diubah_oleh        int(10),
+                        PRIMARY KEY (kode_file),
+-                       FOREIGN KEY (direktori) REFERENCES direktori ON DELETE cascade)";
++                       FOREIGN KEY (direktori) REFERENCES direktori(kode_direktori) ON DELETE cascade)";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+@@ -46,8 +47,8 @@
+                        kode_direktori     int(10)         NOT NULL,
+                        kode_pengguna      int(10)         NOT NULL,
+                        PRIMARY KEY (kode_direktori, kode_pengguna),
+-                       FOREIGN KEY (kode_direktori) REFERENCES direktori ON DELETE cascade,
+-                       FOREIGN KEY (kode_pengguna) REFERENCES pengguna ON DELETE cascade)";
++                       FOREIGN KEY (kode_direktori) REFERENCES direktori(kode_direktori) ON DELETE cascade,
++                       FOREIGN KEY (kode_pengguna) REFERENCES pengguna(kode_pengguna) ON DELETE cascade)";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+@@ -56,8 +57,8 @@
+                        kode_direktori     int(10)         NOT NULL,
+                        kode_grup          int(10)         NOT NULL,
+                        PRIMARY KEY (kode_direktori, kode_grup),
+-                       FOREIGN KEY (kode_direktori) REFERENCES direktori ON DELETE cascade,
+-                       FOREIGN KEY (kode_grup) REFERENCES grup ON DELETE cascade)";
++                       FOREIGN KEY (kode_direktori) REFERENCES direktori(kode_direktori) ON DELETE cascade,
++                       FOREIGN KEY (kode_grup) REFERENCES grup(kode_grup) ON DELETE cascade)";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+@@ -66,8 +67,8 @@
+                        kode_direktori     int(10)         NOT NULL,
+                        kode_unit          int(10)         NOT NULL,
+                        PRIMARY KEY (kode_direktori, kode_unit),
+-                       FOREIGN KEY (kode_direktori) REFERENCES direktori ON DELETE cascade,
+-                       FOREIGN KEY (kode_unit) REFERENCES  unit_kerja ON DELETE cascade)";
++                       FOREIGN KEY (kode_direktori) REFERENCES direktori(kode_direktori) ON DELETE cascade,
++                       FOREIGN KEY (kode_unit) REFERENCES  unit_kerja(kode_unit) ON DELETE cascade)";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
+--- Kantaya-Original/setup/tbl_proyek.php	2001-11-30 22:13:24.000000000 +0700
++++ Kantaya/setup/tbl_proyek.php	2021-08-17 19:21:22.030135686 +0700
+@@ -95,7 +95,7 @@
+                        tgl_dibuat          datetime,
+                        diubah_oleh         integer,
+                        tgl_diubah          datetime,
+-                       primary key (kode_proyek, no_kegiatan))";
++                       primary key (no_kegiatan))";
+ 
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+@@ -195,11 +195,11 @@
+                        dibuat_oleh        INT(10),
+                        diubah_oleh        INT(10),
+                        PRIMARY KEY (kode_proyek,no_kegiatan,tgl_kegiatan,kode_personil),
+-                       FOREIGN KEY (kode_proyek) REFERENCES proyek,
+-                       FOREIGN KEY (kode_personil) REFERENCES pengguna,
+-                       FOREIGN KEY (no_kegiatan) REFERENCES jadwal_proyek,
+-                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna,
+-                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna)";
++                       FOREIGN KEY (kode_proyek) REFERENCES proyek(kode_proyek),
++                       FOREIGN KEY (kode_personil) REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY (no_kegiatan) REFERENCES jadwal_proyek(no_kegiatan),
++                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna(kode_pengguna),
++                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna(kode_pengguna))";
+     $table = mysql_query($sqltext,$link);
+     check_mysql_error(mysql_errno(),mysql_error());
+ 
