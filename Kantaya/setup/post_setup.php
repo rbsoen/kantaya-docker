@@ -16,26 +16,9 @@ echo "<td class='judul1' colspan=2>Proses Instalasi Kantaya</td>\n";
 echo "</tr>\n";
 echo "</table><br>\n";
 
-$host = $_POST['host'];
-$root = $_POST['root'];
-$password = $_POST['password'];
-
-$nama_user = $_POST['nama_user'];
-$pswd_user = $_POST['pswd_user'];
-$nama_database = $_POST['nama_database'];
-
-$nama_perusahaan = $_POST['nama_perusahaan'];
-$alamat_perusahaan = $_POST['alamat_perusahaan'];
-$telp_perusahaan = $_POST['telp_perusahaan'];
-$fax_perusahaan = $_POST['fax_perusahaan'];
-$email_perusahaan = $_POST['email_perusahaan'];
-$url_perusahaan = $_POST['url_perusahaan'];
-
 $logo_perusahaan = $_FILES['logo_perusahaan'];
 $logo_perusahaan_type = $logo_perusahaan['type'];
 $logo_perusahaan_name = $logo_perusahaan['name'];
-
-$basepath = $_POST['basepath'];
 
 $link = mysql_connect($host,$root,$password) or die('Tidak dapat Koneksi Ke $root@$host<br>');
 echo "Koneksi Ke $root@$host Sukses<br>\n";

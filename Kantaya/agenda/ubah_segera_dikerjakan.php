@@ -14,10 +14,6 @@ echo "
 </head>
 ";
 
-$hmb = $_GET["hmb"];
-$kode_dikerjakan = $_GET["kode_dikerjakan"];
-$tanggal = $_GET["tanggal"];
-
 $hsl = mysql_query("select * from segera_dikerjakan where kode_dikerjakan = '$kode_dikerjakan';");
 if (!$hsl) {echo mysql_error();}
 $dat = @mysql_fetch_row($hsl);

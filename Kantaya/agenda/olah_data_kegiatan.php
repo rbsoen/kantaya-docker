@@ -5,17 +5,6 @@ include('../lib/koneksi_db.inc');
 include('../lib/fs_kalender.php');
 include('../lib/akses_unit.php');
 
-$hmb = $_POST['hmb'];
-$judul = $_POST['judul'];
-$ptgl = $_POST['ptgl'];
-$pbln = $_POST['pbln'];
-$pthn = $_POST['pthn'];
-$pjammulai = $_POST['pjammulai'];
-$pmntmulai = $_POST['pmntmulai'];
-$pjamakhir = $_POST['pjamakhir'];
-$pmntakhir = $_POST['pmntakhir'];
-$modus = $_POST['modus'];
-
 function simpan_kegiatan() {
   global $dbh, $kode_pengguna, $judul, $ptipe, $spjhari, $pthn, $pbln, $ptgl,
 				 $jamntml, $jamntsl, $kode_pengulangan, $deskripsi, $sftshar, $sharing_publik;

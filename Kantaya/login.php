@@ -14,10 +14,6 @@ Revisi 2	:
  Tgl.     : 27-11-2001
  Oleh     : FB
  Revisi   : Konfigurasi File
-Revisi 3	:
- Tgl.     : 17-08-2021
- Oleh     : rbsoen
- Revisi   : perbaikan sintax php
 ******************************************/
 
 //Cek Konfigurasi File
@@ -35,10 +31,6 @@ if (cek_cfgfile($database)) {
 //Konek ke database
 mysql_connect ($db_host, $db_user, $db_pswd) or die ('Tidak bisa koneksi');
 mysql_select_db ($db_database) or die ('Tidak bisa koneksi ke Database kantaya');
-
-// Rev.3: globals diganti menjadi $_POST
-$username = $_POST['username'];
-$password = $_POST['password'];
 
 //Cek username dan password
 	$sql=mysql_query ("SELECT
@@ -62,17 +54,7 @@ $password = $_POST['password'];
 
 		//default adalah kantaya.css
   		if ($tampilan_css=='') $tampilan_css='kantaya';
-  		
-        session_start();
-  		
-        $_SESSION['kode_pengguna'] = $kode_pengguna;
-        $_SESSION['nama_pengguna'] = $nama_pengguna;
-        $_SESSION['level'] = $level;
-        $_SESSION['email'] = $email;
-        $_SESSION['unit_pengguna'] = $unit_pengguna;
-        $_SESSION['tampilan_css'] = $tampilan_css;
-        $_SESSION['cfgfile'] = $cfgfile;
-        
+        session_register("kode_pengguna", "nama_pengguna", "level", "email", "unit_pengguna", "tampilan_css", "cfgfile");
   		header('Location: agenda/buka_agenda.php');
   } else {
       echo "<center>";

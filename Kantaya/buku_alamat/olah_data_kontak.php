@@ -21,26 +21,6 @@ function openurl(urlpath,tgt)
 <body>
 
 <?php
-$nama = $_POST['nama'];
-$gelar_dpn = $_POST['gelar_dpn'];
-$gelar_blk = $_POST['gelar_blk'];
-$jenis_kelamin = $_POST['jenis_kelamin'];
-$jabatan = $_POST['jabatan'];
-$kantor = $_POST['kantor'];
-$emailp = $_POST['emailp'];
-$web_personal = $_POST['web_personal'];
-$web_kantor = $_POST['web_kantor'];
-$telp_kantor = $_POST['telp_kantor'];
-$telp_hp = $_POST['telp_hp'];
-$telp_rumah = $_POST['telp_rumah'];
-$fax = $_POST['fax'];
-$alamat_kantor = $_POST['alamat_kantor'];
-$kota = $_POST['kota'];
-$kode_pos = $_POST['kode_pos'];
-$propinsi = $_POST['propinsi'];
-$negara = $_POST['negara'];
-$keterangan = $_POST['keterangan'];
-$modus = $_POST['modus'];
 
 $prmtr1 = '';
 $ktg_grup = '';

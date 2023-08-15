@@ -24,19 +24,6 @@ function openurl(urlpath,tgt)
 
 <?php
 
-$tanggal = $_POST["tanggal"];
-$hmb = $_POST["hmb"];
-$pemilik = $_POST["pemilik"];
-$judul = $_POST["judul"];
-$status = $_POST["status"];
-$ptgl = $_POST["ptgl"];
-$pbln = $_POST["pbln"];
-$pthn = $_POST["pthn"];
-$batas_akhir = $_POST["batas_akhir"];
-$kode_dikerjakan = $_POST["kode_dikerjakan"];
-$deskripsi = $_POST["deskripsi"];
-$modus = $_POST["modus"];
-
 echo "<div><center><p><br><br></p><p><br><br>";
 if ($modus !== 'Hapus' and $judul == '' ) {
 	 $msg = "Judul tidak boleh kosong !";

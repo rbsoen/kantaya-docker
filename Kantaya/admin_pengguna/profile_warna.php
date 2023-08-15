@@ -34,8 +34,6 @@ echo "<meta http-equiv='PRAGMA' content='no-cache'>\n";
 echo "</head>\n";
 echo "<body>\n";
 
-$tampilan = $_POST["tampilan"];
-
 if ($tampilan == '') {
     pilih_tampilan();
 } else {
