@@ -23,7 +23,7 @@ services:
     restart: always
   
   phpma:
-    image: phpmyadmin
+    image: beeyev/phpmyadmin-lightweight:latest
     depends_on:
       - db
     restart: always
