@@ -25,7 +25,7 @@ Deskripsi resmi Kantaya menyebutnya sebagai aplikasi *groupware*, yang ditujukan
 
 Seperti yang dijelaskan, software ini cukup jadul dan sepertinya tidak ditemukan versi yang lebih baru. Kodenya sendiri juga penuh dengan celah-celah keamanan dan penggunaan fungsi database yang kurang aman. Oleh karena itu, saya pribadi tidak menyarankan untuk menjalankan software ini untuk hal-hal yang penting - lebih baik mencari alternatif lain yang lebih modern.
 
-Proyek ini dimaksudkan untuk melestarikan (preserving) usaha-usaha awal berkarya dalam kancah Open Source.
+Proyek ini dimaksudkan untuk melestarikan (preservation) usaha-usaha awal komunitas Open Source di Indonesia.
 
 ## Setup
 
@@ -33,28 +33,28 @@ Repo ini digunakan dengan `docker-compose`.
 
 Lingkungan yang digunakan adalah MySQL 5.7, PHP 4.4, Apache 2.2 (image yang digunakan: [[3]](https://hub.docker.com/r/nouphet/docker-php4/))
 
-1. Untuk memulai server, cukup ketik `docker-compose up` pada terminal.
+1. Untuk memulai server, ketik `docker-compose up` pada terminal.
 2. Setelah container-container telah siap semua, bukalah `http://localhost:8000/setup/SETUP.PHP` dalam browser. Akan muncul form setup dengan beberapa entri yang telah terisi. Cukup isi password untuk MySql Admin (lihat `MYSQL_ROOT_PASSWORD` dalam `docker-compose.yml`), password untuk Database User (lihat `MYSQL_PASSWORD` dalam `docker-compose.yml`), serta semua isian dalam Profile Instansi.
 3. Klik `Setup Kantaya` dan jika semua berjalan lancar Anda akan dapat login dengan kredensial yang muncul di layar.
 4. Saat ini sedikit sekali bagian dari Kantaya yang dapat digunakan, disebabkan query-query yang sudah tidak dapat bekerja lagi dalam versi MySQL yang lebih baru serta beberapa fungsi PHP yang dideprekasi.
 5. Tersedia PHPmyadmin untuk saat ini, dapat diakses dengan membuka `http://localhost:8001`.
 
-Untuk membersihkan image, container dan volume yang tidak perlu, ketik `docker image prune`, `docker container prune`, `docker volume prune`.
+Untuk membersihkan konfigurasi container, ketik `docker-compose down`. Jika ingin menyertakan volume, tambahkan `-v`. Jika menyertakan *image*, tambahkan pula `--rmi local`
 
 ## Ceklis Fitur
 Fitur-fitur yang telah diperbaiki:
 
-- [ ] Perbaiki zona waktu PHP
+- [x] Perbaiki zona waktu PHP
 - [x] Setup
 - [x] Login
 - [x] Agenda **(sebagian)**
 - [ ] Fasilitas
-- [ ] Buku Alamat
+- [ ] Buku Alamat (tabel hilang)
 - [ ] Almari File
 - [ ] Dimana?
 - [ ] Proyek
-- [ ] Forum
+- [x] Forum **(sebagian)**
 - [ ] Diskusi
 - [ ] Surat
-- [ ] URL Link
+- [ ] URL Link (tabel hilang)
 - [ ] Profil Pengguna
