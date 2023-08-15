@@ -58,6 +58,7 @@
                  $errtext = "Nama Forum tidak boleh sama";
                  tampilkan_error('',$errtext);
              }
+             $respon = 0;
              $sqltext = "insert into topik (kode_forum,judul,isi_topik,respon_thd,
 					dibuat_oleh,dibuat_tgl)
                     values ('".$idforum."','".$judultopik."','".$isitopik."','".$respon."',".$id_user.",'".$dibuat_tgl."')";
