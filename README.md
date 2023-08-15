@@ -27,6 +27,8 @@ Seperti yang dijelaskan, software ini cukup jadul dan sepertinya tidak ditemukan
 
 Proyek ini dimaksudkan untuk melestarikan (preservation) usaha-usaha awal komunitas Open Source di Indonesia.
 
+Folder `Kantaya` dalam repo ini merupakan versi yang telah diperbaiki untuk digunakan dalam Docker container. Versi asli dari software ini dapat ditemukan di `software_kantaya.zip`.
+
 ## Setup
 
 Repo ini digunakan dengan `docker-compose`.
