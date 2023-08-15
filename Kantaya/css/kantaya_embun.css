@@ -1,0 +1,27 @@
+<STYLE TYPE="text/css">
+<!--
+    A:link {text-decoration: underline; color: #003399;}
+    A:visited {text-decoration: underline; color: #003399;}
+    A:active {text-decoration: underline; color: #000000;}
+    A:hover {text-decoration: underline; color: #000000;}
+    A.done {text-decoration: line-through !important;}
+           .done {text-decoration: line-through !important;}
+           
+	BODY {background: #ffffff;}
+	body { font-family: Verdana,Geneva,Arial,Helvetica,sans-serif; font-size: 10pt; }
+	pre { font-family: Verdana,Lucida Console, monospace; font-size: 10pt; }
+	tt { font-family: Verdana,Lucida Console, monospace; font-size: 10pt; }
+	td { font-family: Verdana,Geneva,Arial,Helvetica,sans-serif; font-size: 10pt; }
+
+	TABLE {background: #ffffff; spacing: 1; }
+	TD.judul1 {font-family: Verdana,Arial,Helvetica,sans-serif; background: #009966; color: white; font-size: 13pt; font-weight: bold; }
+	TD.judul2 {font-family: Verdana,Arial,Helvetica,sans-serif; background: #99CC99; color: black; font-size: 10pt; font-weight: bold; }
+	TD.judul3 {font-family: Verdana,Arial,Helvetica,sans-serif; background: #99CC99; color: black; font-size: 8pt; font-weight: bold; }	
+	
+	TD.isi1 {font-family: Verdana,Arial,Helvetica,sans-serif; background: #ffffff; color: black; font-size: 8pt; }
+	TD.isi2 {font-family: Verdana,Arial,Helvetica,sans-serif; background: #ffffff; color: black; font-size: 8pt; }
+	TD.isi3 {font-family: Verdana,Arial,Helvetica,sans-serif; background: #99CC99; color: black; font-size: 8pt; }	
+-->
+</STYLE>
+
+

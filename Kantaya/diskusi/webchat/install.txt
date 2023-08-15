@@ -1,0 +1,78 @@
++-------------------+
+|  W e b   C h a t  |
++-------------------+
+
+1. Features:
+   WebChat is an chat application for JavaScript compatible web browsers.
+    - multiple rooms. 
+    - no browser flicker between message translation.
+    - web based room management.
+    - private messages.
+    - emotions and text formating.
+
+2. Requires:
+
+   Apache WebServer
+   PHP3/4
+   MySQL
+   Web Browser with JavaScript support
+
+3. Install
+
+   3.1 Verify Apache configuration: 
+   
+     DirectoryIndex index.php index.html index.htm
+     ...
+     AddType 	application/x-httpd-php .php
+
+   3.2 Change database permision:
+
+   Edit file setup/create_db_mysql.sql
+   and change the username (chat_user) and password (webpass):
+
+     grant all privileges on chat.* to chat_user@localhost 
+     identified by 'webpass';
+
+   Also, change the username and password for accessing admin/
+
+     insert into chat.user values (1, 'admin', 0, 0, PASSWORD('admin'));
+
+   After that, you can create database & tables importing 
+   from: 
+     setup/create_db_mysql.sql 
+
+   You can do this by editing and running one of the files:
+     setup/setup.sh  or 
+     setup/setup.bat
+
+   3.3 Change WebChat configuration:
+
+   Edit file defines.php 
+   Set language of chat:
+     include ('./language/english.php');
+
+   Set database access according to step 3.2:
+     var $Database = "chat";
+     var $User     = "chat_user";
+     var $Password = "webpass";
+   These are defaults WebChat values. It is recomanded to change them.
+
+   3.4 Secure it
+
+   Once finished with setting up the webchat, please remove the setup/
+   Directory from the Webdirectory, since it contains plain-text
+   passwords for the mysql-Database.
+   
+4. Edit chat rooms:
+
+   Go to http://yourserver/path/to/webchat/admin.
+   Login yourself with username and passord added at 2.2
+   Add / modify / remove chat rooms.
+
+
+5. BUGS:
+   Please reports any bug at dt@dnt.ro 
+
+6. TODO:
+   - Add private rooms.
+   - Register users.

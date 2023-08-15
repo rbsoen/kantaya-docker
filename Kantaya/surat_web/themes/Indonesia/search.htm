@@ -1,0 +1,78 @@
+
+<html>
+<head>
+    <title>Search</title>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+	<title></title>
+
+<link rel="stylesheet" href="themes/english/webmail.css" type="text/css">
+<script language="JavaScript" src="themes/english/webmail.js" type="text/javascript"></script>
+
+
+<!--%UM_JS%-->
+
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#000000" vlink="#000000" alink="#000000">
+
+<table cellspacing=2 cellpadding=0 border=0 align=center bgcolor=White width=637>
+	<tr>
+		<td valign=top width=2>
+
+            &nbsp;		
+
+		</td>
+		<td valign=top width="649">
+			<table cellspacing=1 cellpadding=1 width="624" border=0 bgcolor=#FFFFFF>
+			<tr>
+				<td class="default" colspan="5" width="616">
+					Tipe phrase atau kata yang dicari.<br>
+					Pencarian akan <b>hanya</b> berfungsi pada surat yang sudah terambil
+				</td>
+
+			<tr>
+				<form name="form1" action="pencarian.php" method="POST">
+				<input type=hidden name=lid value="<!--%UM_LID%-->">
+				<input type=hidden name=sid value="<!--%UM_SID%-->">
+				<td class="default" colspan="5" width="616">
+					<input type=text name=s value="<!--%UM_INPUT_TEXT%-->" class="textbox"> &nbsp;<input type=submit value="Cari >>" class=button>
+					<br><br>
+				</td>
+				</form>
+			</tr>
+			
+			<!--%UM_RESULTS_BEGIN%-->
+				<tr>
+				    <td width="616"  class="default"  colspan="5"><!--%UM_RESULT_COUNT%--></td>
+				</tr>
+				<tr>
+				    <td width="17"  class="headers"><img src=images/attach.gif border=0></td>
+				    <td width="208" class="headers"> <b>Subyek</b>  </td>
+				    <td width="208" class="headers"> <b>Dari</b>    </td>
+				    <td width="92" class="headers"> <b>Tanggal</b> </td>
+				    <td width="67" class="headers"> <b>Almari</b>  </td>
+				</tr>
+				<!--%UM_ML_LOOPBEGIN%-->
+				<tr>
+					<td class="default" width="17">&nbsp;<!--%UM_ML_HAVE_ATTACH%--></td>
+					<td class="default" width="208">&nbsp;<!--%UM_ML_SUBJECT%--></td>
+					<td class="default" width="208">&nbsp;<!--%UM_ML_FROM%--></td>
+					<td class="cent" width="92">&nbsp;<!--%UM_ML_DATE%--></td>
+					<td class="default" width="67">&nbsp;<!--%UM_BOX%--></td>
+				</tr>
+				<!--%UM_ML_LOOPEND%-->
+			<!--%UM_RESULTS_END%-->
+
+			<!--%UM_NOT_FOUND_BEGIN%-->
+				<tr>
+				    <td width="616"  class="default"  colspan="5"><center><br>Tidak ditemukan<br><br></center></td>
+				</tr>
+			<!--%UM_NOT_FOUND_END%-->
+
+		</table>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
+

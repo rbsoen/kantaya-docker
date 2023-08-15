@@ -1,0 +1,86 @@
+<title>daftar surat untuk <!--%UM_USER_EMAIL%--></title>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+
+<script language="JavaScript" src="themes/english/webmail.js" type="text/javascript"></script>
+
+<!--%UM_JS%-->
+
+</head>
+
+<body >
+
+<table cellspacing=2 cellpadding=0 border=0 align=center bgcolor=White width=700>
+	<tr>
+  		<td valign=top>
+			<table cellspacing=1 cellpadding=1 width="100%" border=0 bgcolor=White>
+			<!--%UM_BEGIN_MESSAGE_LIST%-->
+			<tr>
+				<form name=form1 action=daftarsurat.php method=post>
+				<input type=hidden name=lid value="<!--%UM_LID%-->">
+				<input type=hidden name=sid value="<!--%UM_SID%-->">
+				<input type=hidden name=decision value=delete>
+				<input type=hidden name=folder value="<!--%UM_ACTIVE_FOLDER%-->">
+				<input type=hidden name=pag value="<!--%UM_ACTIVE_PAGE%-->">
+				<td colspan="7" class="default"> &nbsp;&nbsp;<!--%UM_MESSAGECOUNT%--></td>
+			</tr>
+
+			<!--%UM_ERROR_BEGIN%-->
+			<tr>
+				<td colspan="7" class="default"><font color=red><b> &nbsp;&nbsp;<!--%UM_ERROR_MSG%--></b></font></td>
+			</tr>
+			<!--%UM_ERROR_END%-->
+		
+			<tr>
+			    <td width="5"  class="judul2">Pilihan&nbsp;</td>
+			    <td width="5"  class="judul2"><a href="javascript:sortby('attach')"><img src=images/attach.gif border=0></a></td>
+			    <td width="220" class="judul2"> <b><a href="javascript:sortby('subject')">Subyek</a></b> </td>
+			    <td width="220" class="judul2"> <b><a href="javascript:sortby('fromname')">Dari</a></b> </td>
+			    <td width="90" class="judul2"> <b><a href="javascript:sortby('date')">Tanggal</a></b> </td>
+			    <td width="60" class="judul2"> <b><a href="javascript:sortby('size')">Ukuran</a></b> </td>
+			</tr>
+		
+			<!--%UM_ML_LOOPBEGIN%-->
+			<tr>
+				<td class="isi2"><!--%UM_ML_CHECKBOX%--></td>
+				<td class="isi2"><!--%UM_ML_HAVE_ATTACH%--></td>
+				<td class="isi2"><!--%UM_ML_SUBJECT%--></td>
+				<td class="isi2"><!--%UM_ML_FROM%--></td>
+				<td class="isi2"><!--%UM_ML_DATE%--></td>
+				<td class="isi2"><!--%UM_ML_SIZE%--></td>
+			</tr>
+			<!--%UM_ML_LOOPEND%-->
+			<tr>
+				<td colspan="7" class="default">&nbsp; 
+				<a class="menu" href="javascript:sel()">Pilih semua</a> ::
+				<a class="menu" href="javascript:delemsg()">Hapus yang terseleksi</a> ::
+				<a class="menu" href="javascript:movemsg()">Terseleksi dipindah ke</a> <!--%UM_AVAL_FOLDERS%--></a></td>
+			</tr>
+
+			<tr>
+				<td colspan="7" class="default"> &nbsp;&nbsp;<!--%UM_MESSAGE_NAVIGATION%--></td>
+			</tr>
+			<!--%UM_END_MESSAGE_LIST%-->
+		
+			<!--%UM_BEGIN_NO_MESSAGES%-->
+			<tr>
+				<td colspan="7" class="cent"><br> &nbsp;&nbspTidak ada surat didalam almari "<b><!--%UM_BOX_NAME%--></b>"<br><br></td>
+			</tr>
+			<!--%UM_END_NO_MESSAGES%-->
+			</form>
+
+			<tr>
+				<td class="cent" colspan=7>Batas kuota: <!--%UM_USAGE_GRAPHIC%--> &nbsp;
+					Telah digunakan <b><!--%UM_TOTAL_USED%--></b> dari <b><!--%UM_AVAL_SIZE%--></b> yang tersedia
+				</td>
+			</tr>
+
+
+		</table>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
+

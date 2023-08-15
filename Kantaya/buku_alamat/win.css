@@ -1,0 +1,11 @@
+body, li { font-size: 10pt; font-family: Verdana, arial; text-decoration:none; }
+a:visited {color: #0000FF; }
+input, textarea { background-color: #F5F5F5; font-family: Verdana, arial; font-size: 8pt; }
+select { font-family: Verdana, helvetica; background-color: #F5F5F5; font-size: 8pt; }
+form {margin:0; padding:0;}
+td {font-size: 8pt; font-family: Verdana, arial; text-decoration:none; vertical-align:center; }
+#mo  {background-color: #006699; color: #cccccc; font-weight: bold; text-align: right; }
+#ma  {background-color: #cccccc; color: #006699; font-weight: bold; text-align: right; }
+#vn { color:silver; }
+#ri { text-align: right; }
+#normal { font-size: 10pt; }

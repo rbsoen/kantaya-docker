@@ -1,0 +1,72 @@
+
+<html>
+<head>
+
+<title>Alamari Surat</title>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<link rel="stylesheet" href="themes/english/webmail.css" type="text/css">
+<script language="JavaScript" src="themes/english/webmail.js" type="text/javascript"></script>
+
+
+<!--%UM_JS%-->
+
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#000000" vlink="#000000" alink="#000000">
+
+<table cellspacing=2 cellpadding=0 border=0 align=center bgcolor=White width=702>
+	<tr>
+		<td valign=top width=2>
+            &nbsp;		
+		</td>
+		<td valign=top width="690">
+			<table cellspacing=1 cellpadding=1 width="100%" border=0 bgcolor=White>
+			<tr>
+			    <td width="40%" class="headers"><b>Almari</b> </td>
+			    <td width="15%" class="headers"><b>Pesan/Surat</b></td>
+			    <td width="15%" class="headers"><b>Ukuran</b></td>
+			    <td width="18%" class="headers"><b>Kosong</b></td>
+			    <td width="12%" class="headers"><b>Hapus</b></td>
+			</tr>
+
+			<!--%UM_BEGIN_FOLDERS_LOOP%-->
+			<tr>
+				<td class="default"><a href="<!--%UM_LINK%-->"><!--%UM_BOX_NAME%--></a></td>
+				<td class="cent"><!--%UM_READ_UNREAD%--></td>
+				<td class="right"><!--%UM_BOX_SIZE%--> &nbsp;</td>
+				<td class="cent"><!--%UM_EMPTY_LINK%--></td>
+				<td class="cent"><!--%UM_DEL_LINK%--></td>
+			</tr>
+			<!--%UM_END_FOLDERS_LOOP%-->
+			<tr>
+				<td class="default">&nbsp;</td>
+				<td class="right"><b>Total:</b> &nbsp;</td>
+				<td class="right"><b><!--%UM_TOTAL_USED%--></b> &nbsp;</td>
+				<td class="cent">&nbsp;</td>
+				<td class="cent">&nbsp;</td>
+			</tr>
+
+			<tr>
+				<td class="cent" colspan=5>Batas Kuota: <!--%UM_USAGE_GRAPHIC%--> &nbsp;
+					Digunakan <b><!--%UM_TOTAL_USED%--></b> dari <b><!--%UM_AVAL_SIZE%--></b> yang tersedia
+				</td>
+			</tr>
+
+			<tr>
+				<form name="form1" action="almarisurat.php" method="POST" onsubmit="return create();">
+				<input type=hidden name=sid value=<!--%UM_SID%-->>
+				<input type=hidden name=lid value=<!--%UM_LID%-->>
+				<td class="default" colspan="5">
+				<br>
+					<input name=newfolder value="Almari" class="textbox" onFocus="this.value=''" size="20"> &nbsp;<input type=button value="Almari Baru" class=button onClick="create()">
+				</td>
+				</form>
+			</tr>
+		</table>
+		</td>
+	</tr>
+</table>
+</body>
+</html>
+

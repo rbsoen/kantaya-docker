@@ -1,0 +1,141 @@
+<?php
+include ('../lib/cek_sesi.inc');
+include('../lib/fs_kalender.php');
+include('../lib/fs_umum.php');
+include('../lib/akses_unit.php');
+require('forum_cfg.php');
+$css = "forum.css";
+
+$db = mysql_connect($host, $root);
+mysql_select_db($database, $db);
+
+list($jns_sharing,$grup_sharing) = split(';',$p1);
+if ($jns_sharing == "U") {
+    $query = mysql_query("SELECT * FROM unit_kerja WHERE kode_unit = '$grup_sharing'", $db);
+    $query = mysql_fetch_array($query);
+    $unit_grup = $query["nama_unit"];
+} elseif ($jns_sharing == "G") {
+    $query = mysql_query("SELECT * FROM grup WHERE kode_grup = '$grup_sharing'", $db);
+    $query = mysql_fetch_array($query);
+    $unit_grup = $query["nama_grup"];
+}
+$grup = $jnskategori.";".$kdkategori;
+$query = mysql_query("SELECT * FROM proyek WHERE kode_proyek=$p1", $db);
+$proyek = mysql_fetch_array($query);
+
+$tujuan = nl2br(ereg_replace("'","&#39;",htmlspecialchars($proyek['tujuan'])));
+$tujuan = @eregi_replace("(((f|ht){1}tp://)[a-zA-Z0-9@:%_.~#-\?&]+[a-zA-Z0-9@:%_~#\?&])", "<a href=\"\\1\" target=\"_blank\">\\1</a>", $tujuan); //http
+$tujuan = @eregi_replace("([[:space:]()[{}])(www.[a-zA-Z0-9@:%_.~#-\?&]+[a-zA-Z0-9@:%_~#\?&])", "\\1<a href=\"http://\\2\" target=\"_blank\">\\2</a>", $isitopik); // www.
+$tujuan = @eregi_replace("([_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.)+[a-z]{2,3})","<a href=\"mailto:\\1\">\\1</a>", $tujuan);
+
+$sasaran = nl2br(ereg_replace("'","&#39;",htmlspecialchars($proyek['sasaran'])));
+$sasaran = @eregi_replace("(((f|ht){1}tp://)[a-zA-Z0-9@:%_.~#-\?&]+[a-zA-Z0-9@:%_~#\?&])", "<a href=\"\\1\" target=\"_blank\">\\1</a>", $sasaran); //http
+$sasaran = @eregi_replace("([[:space:]()[{}])(www.[a-zA-Z0-9@:%_.~#-\?&]+[a-zA-Z0-9@:%_~#\?&])", "\\1<a href=\"http://\\2\" target=\"_blank\">\\2</a>", $sasaran); // www.
+$sasaran = @eregi_replace("([_\.0-9a-z-]+@([0-9a-z][0-9a-z-]+\.)+[a-z]{2,3})","<a href=\"mailto:\\1\">\\1</a>", $sasaran);
+
+echo "<html>\n";
+echo "<head>\n";
+echo "<title>List Proyek</title>\n";
+echo "<link rel=stylesheet type='text/css' href='$css'>\n";
+echo "<meta http-equiv='Content-Style-Type' content='text/css'>\n";
+
+echo "<script language='Javascript'>\n";
+echo "function showUserList(pfld,pfltr) {\n";
+echo "  if (window.PsnList && window.PsnList.open && !window.PsnList.closed) {\n";
+echo "    window.PsnList.close();\n";
+echo "  }\n";
+//echo " alert(navigator.appName)\n";
+echo "  PsnList = window.open('../lib/list_pengguna.php?pfld='+pfld+'&pfltr='+pfltr, 'List', 'width=390,height=450,scrollbars=yes');\n";
+echo "};\n";
+echo "function showCldList(fld, dflt, range) {\n";
+echo "  if (window.CldWin && window.CldWin.open && !window.CldWin.closed) {\n";
+echo "    window.CldWin.close();\n";
+echo "  }\n";
+echo "  CldWin = window.open('../lib/kalender.php?pfld='+fld+'&pdflt='+dflt+'&prange='+range, 'List', 'width=300,height=200');\n";
+echo "};\n";
+echo "</script>\n";
+
+echo "</head>\n";
+echo "<body>\n";
+echo "<table width='100%' border=1>\n";
+echo "<tr>\n";
+echo "<td class='judul1'>Detail Data Proyek</td>\n";
+echo "</tr>\n";
+//echo "<tr>\n";
+//echo "<td>&nbsp;</td>\n";
+//echo "</tr>\n";
+echo "</table>\n";
+
+echo "<table width='100%' border=1>\n";
+echo "<tr>\n";
+echo "<td class='judul3' colspan=4>\n";
+     if ($jns_sharing == "U") {
+         echo "Unit : $unit_grup\n";
+     } elseif ($jns_sharing == "G") {
+         echo "Grup : $unit_grup\n";
+     }
+echo "</td>\n";
+echo "</tr>\n";
+echo "<tr>\n";
+echo "<td width='20%'>No Proyek</td>\n";
+echo "<td width='30%'>".$proyek["no_proyek"]."&nbsp;</td>\n";
+echo "<td width='20%'>Tahun Anggaran</td>\n";
+echo "<td width='30%'>".$proyek["tahun_anggaran"]."&nbsp;</td>\n";
+echo "</tr>\n";
+echo "<tr>\n";
+echo "<td width='20%'>Nama Proyek</td>\n";
+echo "<td colspan=3>".$proyek["nama_proyek"]."&nbsp;</td>\n";
+echo "</tr>\n";
+echo "<tr>\n";
+echo "<td width='20%'>Singkatan</td>\n";
+echo "<td width='30%'>".$proyek["singkatan"]."&nbsp;</td>\n";
+echo "<td width='20%'>Jenis Proyek</td>\n";
+echo "<td width='30%'>".$proyek["jenis_proyek"]."&nbsp;</td>\n";
+echo "</tr>\n";
+echo "<tr>\n";
+echo "<td width='20%'>Unit Pengelola</td>\n";
+echo "<td colspan=3>".$proyek["unit_pengelola"]."&nbsp;</td>\n";
+echo "</tr>\n";
+echo "<tr>\n";
+echo "<td width='20%'>Koordinator</td>\n";
+echo "<td colspan=3>\n";
+     ambil_data_pengguna($db, $row["koordinator"], $koordinator);
+     echo "<a href=mailto:".$koordinator["email"].">".$koordinator["nama"]."</a>&nbsp;\n";
+echo "</td>\n";
+echo "</tr>\n";
+echo "<tr>\n";
+echo "<td width='20%'>Status</td>\n";
+echo "<td colspan=3>".$proyek["status"]."&nbsp;</td>\n";
+echo "</tr>\n";
+
+echo "<tr>\n";
+echo "<td width='20%'>Tgl Mulai</td>\n";
+echo "<td colspan=3>".tanggal('S',$proyek["tgl_mulai"])".&nbsp;</td>\n";
+echo "</tr>\n";
+echo "<tr>\n";
+echo "<td width='20%'>Tgl Selesai</td>\n";
+echo "<td colspan=3>".tanggal('S',$proyek["tgl_selesai"])".&nbsp;</td>\n";
+echo "</tr>\n";
+echo "<tr>\n";
+echo "<td width='20%'>Lokasi</td>\n";
+echo "<td colspan=3>".$proyek["lokasi"]."&nbsp;</td>\n";
+echo "</tr>\n";
+echo "<tr>\n";
+echo "<td width='20%'>Kata Kunci</td>\n";
+echo "<td colspan=3>".$proyek["kata_kunci"]."&nbsp;</td>\n";
+echo "</tr>\n";
+echo "<tr>\n";
+echo "<td width='20%' valign='top'>Tujuan</td>\n";
+echo "<td colspan=3 valign='top'>".$tujuan."&nbsp;</td>\n";
+echo "</tr>\n";
+echo "<tr>\n";
+echo "<td width='20%' valign='top'>Sasaran</td>\n";
+echo "<td colspan=3 valign='top'>".$sasaran."&nbsp;</td>\n";
+echo "</tr>\n";
+echo "</table>\n";
+
+
+echo "</form>\n";
+echo "</body>\n";
+echo "</html>\n";
+

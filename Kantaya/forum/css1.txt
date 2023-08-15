@@ -1,0 +1,37 @@
+
+BODY {background: #c0c0c0;}
+body { font-family: Geneva,Arial,Helvetica,sans-serif; font-size: 10pt; }
+pre { font-family: Lucida Console, monospace; font-size: 10pt; }
+tt { font-family: Lucida Console, monospace; font-size: 10pt; }
+td { font-family: Geneva,Arial,Helvetica,sans-serif; font-size: 10pt; }
+
+.h1 { font-size: 18pt; color: white; font-family: Verdana,Geneva,Arial,Helvetica,sans-serif; }
+.h1black { font-size: 18pt; color: black; font-family: Verdana,Geneva,Arial,Helvetica,sans-serif; }
+.h2 { font-size: 14pt; color: #ccccff; }
+.h2black { font-size: 14pt; color: black; }
+
+a { color: #333399; text-decoration: underline; }
+a:visited { color: #6666aa; text-decoration: underline; }
+a:hover { color: #0000ff; text-decoration: underline; }
+
+a.side { color: #ff9900; text-decoration: none; }
+a.side:visited { color: #ffcc66; text-decoration: none; }
+a.side:hover { color: #ffffcc; text-decoration: underline; }
+
+a.anchor { color: #000066; text-decoration: none; }
+
+td.side { color: white; }
+
+
+
+body, a, li { font-size: 8pt; font-family: Arial, helvetica, sans-serif; text-decoration:none; }
+a:visited {color: #0000FF; }
+input, textarea { background-color: #F5F5F5; font-family: courier, sans-serif; font-size: 8pt; border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px;}
+select { font-family: Arial, helvetica, sans-serif; background-color: #F5F5F5; font-size: 8pt; }
+form {margin:0; padding:0;}
+td {font-size: 8pt; font-family: Arial, helvetica, sans-serif; text-decoration:none; vertical-align:top; }
+#mo  {background-color: #006699; color: #cccccc; font-weight: bold; text-align: right; }
+#ma  {background-color: #cccccc; color: #006699; font-weight: bold; text-align: right; }
+#vn { color:silver; }
+#ri { text-align: right; }
+#normal { font-size: 10pt; }

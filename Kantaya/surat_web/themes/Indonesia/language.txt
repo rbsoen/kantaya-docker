@@ -1,0 +1,72 @@
+; ***************************************** ;
+; Nama untuk Sistem Folder;
+; ***************************************** :
+
+inbox_extended                = Inbox
+sent_extended                 = Sent
+trash_extended                = Trash
+
+; ***************************************** ;
+; Navigasi text ;
+; ***************************************** ;
+previous_text                 =  Sebelumnya
+next_text                     =  Selanjutnya
+
+
+; ***************************************** ;
+; POP3 Kesalahan                               ;
+; ***************************************** ;
+
+error_permiss                 = Anda perlu menset mode direktori dalam temporari folder
+error_retrieving              = Tidak dapat menerima surat
+error_deleting                = Tidak dapat menghapus surat
+error_connect                 = Tidak dapat berhubungan dengan Server
+error_other                   = Terjadi kesalahan,  Silahkan kontak dengan administrator anda
+
+; ***************************************** ;
+; Nama tida benar pada mailbox              ;
+; ***************************************** ;
+error_invalid_name            = Nama tidak benar - Hanya menggunakan karakter: A-Z, 0-9, .- dan spasi
+
+; ***************************************** ;
+; Validasi ketika mengirim email  ;
+; ***************************************** ;
+error_no_recipients           = Anda harus mengisi minimal satu penerima surat
+error_compose_invalid_mail1_s = Email tidak bisa di proses
+error_compose_invalid_mail1_p = Email tidak bisa di proses
+error_compose_invalid_mail2_s = Pastikan bahwa surat sudah benar sebelum dikirim
+error_compose_invalid_mail2_p = Pastikan bahwa surat sudah benar sebelum dikirim
+
+
+; ***************************************** ;
+; Konfirmasi Penghapusan                    ;
+; ***************************************** ;
+confirm_delete                =  Anda yakin untuk menghapus surat ini ?
+
+; ***************************************** ;
+; Display a message counter                 ;
+; ***************************************** ;
+msg_count_p                   = Anda telah menerima <b>%s</b> surat
+msg_count_s                   = Anda telah  menerima<b>1</b> surat
+msg_unread_p                  = , <b>%s tak terbaca</b>
+msg_unread_s                  = , <b>1 tak terbaca</b></b>
+msg_no_unread                 = , terbaca</b>
+msg_boxname                   = , dalam almari "<b>%s</b>"
+
+; ***************************************** ;
+; If the message no have a subject or sender;
+; ***************************************** ;
+no_subject_text               = [no subject]
+no_sender_text                = [Unknown]
+
+; ***************************************** ;
+; Messages from the address book management ;
+; ***************************************** ;
+addr_saved                    = Alamat "<b>%s</b>" telah berhasil dihapus
+addr_added                    = Alamat "<b>%s</b>" telah berhasi ditambahkan
+addr_deleted                  = Masukan telah dihapus
+
+; ***************************************** ;
+; Batas Kuota telah habis           ;
+; ***************************************** ;
+quota_exceeded                = Batas kuota ruang disk anda sudah penuh.\r Silahkan hapus surat lama dan ulangi lagi

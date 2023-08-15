@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Web Surat - Login</title>
+<!--%UM_JS%-->
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#000000" vlink="#000000" alink="#000000">
+<div align="left">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="2">
+	<tr>
+		<td bgcolor=white>
+			
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+          <form name="form1" action="daftarsurat.php" method=post>
+            <input type="hidden" name=sid value="<!--%UM_SID%-->">
+            <tr> 
+              <td align=left class="judul1" colspan=2 width="885" bgcolor="#006699">
+                <p align="left"><font color="#FFFFFF" size="4"><b><font size="3" face="Verdana, Arial, Helvetica, sans-serif">&nbsp; 
+                  Web Surat Kantaya</font></b></font></p>
+              </td>
+            <tr> 
+              <td align=left colspan=2 width="885">&nbsp;&nbsp;</td>
+            <tr> 
+              <td align=left colspan=2 width="885"><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Selamat 
+                datang di Web Surat Kantaya, Anda dapat memanfaatkan fasilitas 
+                ini untuk berkirim surat secara elektronik.</font></td>
+            <tr> 
+              <td align=left colspan=2 width="885"><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Perhatian, 
+                sebelum memasuki halaman web surat ini Anda diwajibkan mengisi 
+                nama dan password anda sesuai dengan lokal email server yang telah 
+                disediakan oleh administrator.</font></td>
+            <tr> 
+              <td align=left colspan=2 width="885"><font face="Verdana, Arial, Helvetica, sans-serif" size="2">Apabila 
+                email server yang tersedia tidak sesuai dengan alamat yang anda 
+                inginkan, silahkan berhubungan dengan administrator... </font> 
+                <p><font face="Verdana, Arial, Helvetica, sans-serif" size="2"></font>
+              </td>
+            <tr> 
+              <td align=right colspan=2 width="885"></td>
+              <!--%UM_VARIABLE_SERVER_BEGIN%-->
+            <tr> 
+              <td align=right class="right" width="270"><b>Alamat Email Anda</b>: 
+                &nbsp;</td>
+              <td class="default" width="613"> 
+                <input type=text size=25 name=f_email value="" class="textbox">
+              </td>
+            <tr> 
+              <td align=right class="right" width="270"><b>Login ke (POP3/SMTP)</b>: 
+                &nbsp;</td>
+              <td class="default" width="613"> 
+                <input type=text size=15 name=f_user value="<!--%UM_F_USER%-->" class="textbox">
+              </td>
+            <tr> 
+              <td align=right class="right" width="270"><b>Password</b>: &nbsp;</td>
+              <td class="default" width="613"> 
+                <input type=password size=15 name="f_pass" class="textbox">
+              </td>
+            <tr> 
+              <td align=right class="right" width="270"><b>Server (mailserver.nama_domain.com)</b>: 
+                &nbsp;</td>
+              <td class="default" width="613"> 
+                <input type=text size=20 name="f_server" class="textbox">
+              </td>
+              <!--%UM_VARIABLE_SERVER_END%-->
+              <!--%UM_STATIC_SERVER_BEGIN%-->
+            <tr> 
+              <td align=right class="right" width="270" valign="middle"><b>Login 
+                (POP3/SMTP) Server</b>: &nbsp;</td>
+              <td class="default" width="613" valign="middle"> 
+                <input type=text size=15 name=f_user value="<!--%UM_F_USER%-->" class="textbox">
+                &nbsp;<b> 
+                <!--%UM_SERVERS%-->
+                </b></td>
+            <tr> 
+              <td align=right class="right" width="270"><b>Password</b>: &nbsp;</td>
+              <td class="default" width="613"> 
+                <input type=password size=15 name="f_pass" class="textbox">
+              </td>
+              <!--%UM_STATIC_SERVER_END%-->
+              <!--%UM_LANGUAGE_BEGIN%-->
+            <tr> 
+              <td align=right class="right" width="270"><b>Bahasa</b>: &nbsp;</td>
+              <td class="default" width="613"> 
+                <!--%UM_LANGUAGES%-->
+              </td>
+              <!--%UM_LANGUAGE_END%-->
+            <tr> 
+              <td align=right width="270">&nbsp;</td>
+              <td width="613"> 
+                <input type=submit name=submit value="Login >>" class="button">
+              </td>
+          </form>
+        </table>
+		</td>
+	</tr>
+</table>
+
+</div>
+
+</body>
+</html>

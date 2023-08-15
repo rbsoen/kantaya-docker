@@ -1,0 +1,68 @@
+
+<html>
+<head><title>List Topik Diskusi</title></head>
+<body bgcolor='#FFFF5E' alink=blue vlink=blue>
+<table width='100%' border=0>
+<tr >
+<td width='20%'>Kategori </td>
+<td width='80%'>: Publik</td>
+</tr>
+<tr >
+<td width='20%'>Forum </td>
+<td width='80%'>: welcome</td>
+</tr>
+<tr >
+<td width='20%'>Topik </td>
+<td width='80%'>: Welcome Statement 4</td>
+</tr>
+<tr >
+<td width='20%'>Dikirimkan Oleh </td>
+<td width='80%'>: 1 Tanggal: 2001-09-22</td>
+</tr>
+<tr >
+<td colspan=2 bgcolor='#FF8040'>Isi Topik </td>
+</tr>
+<tr >
+<td colspan=2>xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+</tr>
+</table>
+SELECT * FROM topik WHERE struktur like '4-%'<table width='100%' border=0>
+<tr bgcolor='#FF8040'>
+<td>List Tanggapan</td>
+</tr>
+<tr>
+<td>
+<ul>
+<a href='topik_detail.php?idforum=6&idtopik=17'>qqq (oleh: 1 tgl: 22-Sep-2001)</a>
+<ul>
+<a href='topik_detail.php?idforum=6&idtopik=18'>qqq1 (oleh: 1 tgl: 23-Sep-2001)</a>
+</ul>
+</ul>
+</td>
+</tr>
+</table>
+<p>
+<form name='tambahtopik' method='post' action='postforum.php' target='isi'>
+<input type=hidden name=namaform value='tanggapantopik'>
+<input type=hidden name=idforum value='6'>
+<input type=hidden name=idtopik value='4'>
+<input type=hidden name=respon value='4'>
+<input type=hidden name=struktur value=4>
+<table width='100%' border=0>
+<tr bgcolor='#FF8040'>
+<td colspan=2>Kirim Tanggapan Terhadap Topik Diatas</td>
+</tr>
+<tr>
+<td width='20%'>Judul</td>
+<td width='80%'><input type=text name=judultopik></td>
+</tr>
+<tr>
+<td width='20%'>isi</td>
+<td width='80%'><textarea rows=10 cols=50 name=isitopik></textarea></td>
+</tr>
+<tr>
+<td colspan=2 align='center'><p><input type=submit name=submit value='Kirim Tanggapan'></td>
+</tr>
+</table>
+</body>
+</html>

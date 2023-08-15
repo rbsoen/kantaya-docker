@@ -1,0 +1,47 @@
+<!--
+	.textbox {
+		border-color : #666699 #666699 #666699 #666699;
+		border-width : 1 1 1 1;
+		color : Black; background-color : #99CCFF;
+		height : 19px; font-size : 12px;
+	}
+	.formfield {
+		border-color : #666699 #666699 #666699 #666699;
+		border-width : 1 1 1 1;
+		color : Black; background-color : #99CCFF;
+		height : 19px; font-size : 12px;
+	}
+	.button{
+		border-color : #666699 #666699 #666699 #666699;
+		color : Black; background-color : #99CCFF;
+		height : 19px; font-size : 9px;
+	}
+	BODY {font-family : Tahoma, Arial, sans-serif; text-decoration : none; color : Black;}
+	A { font-family : Tahoma, Arial, sans-serif; text-decoration : none; color : Black;}
+	A:HOVER { font-family : Tahoma, Arial, sans-serif; color : Black; }
+
+	.menu { font-family : Tahoma, Arial, sans-serif; font-size : 8pt;color : #004080; font-weight : bold; }
+	.menu:link { font-family : Tahoma, Arial, sans-serif; font-size : 8pt;color : #004080; font-weight : bold; }
+	.menu:hover { font-family : Tahoma, Arial, sans-serif; font-size : 8pt;color : #004080; font-weight : bold; }
+	.menu:visited { font-family : Tahoma, Arial, sans-serif; font-size : 8pt;color : #004080; font-weight : bold; }
+	.navigation { font-family : Tahoma, Arial, sans-serif; font-size : 8pt;color : #004080; font-weight : bold; }
+
+	.navigation:link { text-decoration: none; font-family : Tahoma, Arial, sans-serif; font-size : 8pt;color : #004080; font-weight : bold; }
+	.navigation:hover { text-decoration: none; font-family : Tahoma, Arial, sans-serif; font-size : 8pt;color : #004080; font-weight : bold; }
+	.navigation:visited { text-decoration: none; font-family : Tahoma, Arial, sans-serif; font-size : 8pt;color : #004080; font-weight : bold; }
+
+	.autolink:link { text-decoration: underline; font-family : Courier New, Tahoma, Arial, sans-serif; font-size : 9pt;color : #004080; }
+	.autolink:hover { text-decoration: underline; font-family : Courier New, Tahoma, Arial, sans-serif; font-size : 9pt;color : #004080; }
+	.autolink:visited { text-decoration: underline; font-family : Courier New, Tahoma, Arial, sans-serif; font-size : 9pt;color : #004080; }
+	TD.rempli { font-family : Tahoma, Arial, sans-serif; background-color : #66CC99;}
+	TD.memo { font-family : Tahoma, Arial, sans-serif; background-color: #0099cc;}
+	TD.cent { font-family : Tahoma, Arial, sans-serif; background-color: #0099cc; text-align: center; background-color : #E4E4E4; font-size : 8pt; color: Black;}
+	TD.right { font-family : Tahoma, Arial, sans-serif; background-color: #0099cc; text-align: right; background-color : #E4E4E4; font-size : 8pt; color: Black;}
+	TD.headers { font-family : Tahoma, Arial, sans-serif; background-color : #7E7E7E; text-align : center; font-size : 8pt;}
+	TD.default { font-family : Tahoma, Arial, sans-serif; background-color : #E4E4E4; font-size : 8pt;color : Black; }
+	TD.default9 { font-family : Tahoma, Arial, sans-serif; background-color : #f3f3f3; font-size : 9pt;color : Black; }
+	TD.title { font-family : Tahoma, Arial, sans-serif; color: #FFFFFF; background-color : #7E7E7E; text-align : center; font-size : 8pt;}
+	TD.headerright { font-family : Tahoma, Arial, sans-serif; background-color : #7E7E7E; text-align : right;  font-size : 8pt; }
+	TD.headerrightbold { font-family : Tahoma, Arial, sans-serif; background-color : #7E7E7E; text-align : right;  font-size : 8pt;  font-weight : bold; }
+	SELECT 	{ font-size : 8pt; }
+-->

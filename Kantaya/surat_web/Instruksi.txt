@@ -1,0 +1,38 @@
+----------------------------------------------------
+Kebutuhan dalam Surat Web
+----------------------------------------------------
+
+* Bekerja pada
+----------------------------------------------------
+- SMTP 
+- POP3 
+- MIME 
+- Menerima Attachments
+- Mengirim Attachments
+- Mengatur Almari Email seperti (Trash/Inbox/Sent/[Personal])
+- Buku Alamat
+- Pencarian Surat
+- Mengirim email dalam bentuk htmlHTML 
+- Pembatasan ruang disk bagi pengguna
+
+----------------------------------------------------
+- Belum bekerja pada IMAP 
+- Belum dipakai pada penggunaan PHP3 Port
+
+
+* Ketergantungan
+----------------------------------------------------
+--with-imap PHP module - Tidak     
+Sendmail/Qmail         - OPTIONAL  - Mengatur SMTP server secara manual
+Sistem Operasi OS      - Tidak     - Cross platform
+Database               - Tidak     - Mengatur isi email di Hardisk
+Client Cookies         - Tidak     - Mengatur session secara manual
+Client JavaScript      - Ya        - Membuat template menjadi lebih mudah
+PHP                    - Ya        - Pasti
+
+----------------------------------------------------
+INSTALL
+----------------------------------------------------
+Meng-ekstrak (.tar.gz or .zip file) dari kantaya modul kedalam direktori web server.  
+Membuka file konfig_surat.php file dengan teks editor pada direktori surat_web.
+

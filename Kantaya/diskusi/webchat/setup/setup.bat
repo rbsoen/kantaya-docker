@@ -1,0 +1,1 @@
+c:\win.app\mysql\bin\mysql < create_db_mysql.sql

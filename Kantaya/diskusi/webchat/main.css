@@ -1,0 +1,15 @@
+input,select {
+	background : #EEEEEE;
+	border : 1px solid #5566FF;
+	text-decoration : blink;
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-weight : bolder;
+	color: #5566BB;
+}
+A:HOVER {
+	color: #334499; 
+	text-decoration: underline;
+}
+A {
+	text-decoration: none;
+}

@@ -1,0 +1,7 @@
+CREATE TABLE r (	nama		VARCHAR(100)	NOT NULL,
+			unit		VARCHAR(3)	NOT NULL,
+			wewenang	VARCHAR(30)	NOT NULL,
+			lokasi 		VARCHAR(20)	NOT NULL,
+			status 		VARCHAR(1)	NOT NULL,
+			keterangan	VARCHAR(250)
+		);
