@@ -13,11 +13,8 @@ Revisi    :
 ***********************************************************************/
 include ('../lib/cek_sesi.inc');
 include('../lib/fs_umum.php');
-require("../lib/kantaya_cfg.php");
+include('../lib/koneksi_db.inc');
 $css = "../css/".$tampilan_css.".css";
-
-$db = mysql_connect($host, $root);
-mysql_select_db($database, $db);
 
 $pilihan_css[0][0] = 'kantaya_biru';    $pilihan_css[0][1] = 'Kantaya Biru';
 $pilihan_css[1][0] = 'kantaya_hijau';   $pilihan_css[1][1] = 'Kantaya Hijau';
@@ -36,6 +33,8 @@ echo "<meta http-equiv='Content-Style-Type' content='text/css'>\n";
 echo "<meta http-equiv='PRAGMA' content='no-cache'>\n";
 echo "</head>\n";
 echo "<body>\n";
+
+$tampilan = $_POST["tampilan"];
 
 if ($tampilan == '') {
     pilih_tampilan();
@@ -118,9 +117,9 @@ function pilih_tampilan() {
 }
 
 function update_tampilan($tampilan) {
-    global $db, $pilihan_css, $kode_pengguna;
+    global $dbh, $pilihan_css, $kode_pengguna;
     $sqltext = "update pengguna set tampilan_css='".$pilihan_css[$tampilan][0]."' where kode_pengguna='$kode_pengguna'\n";
-    $hasil = mysql_query($sqltext, $db);
+    $hasil = mysql_query($sqltext, $dbh);
     check_mysql_error(mysql_errno(),mysql_error());
 
     echo "<table width='100%' border=0>\n";
