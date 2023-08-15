@@ -21,8 +21,8 @@ function setup_table_fasilitas() {
                        dibuat_oleh        INT(10),
                        diubah_oleh        INT(10),
                        PRIMARY KEY	(kode_fas),
-                       FOREIGN KEY	(dibuat_oleh)	REFERENCES pengguna,
-                       FOREIGN KEY	(diubah_oleh)	REFERENCES pengguna)";
+                       FOREIGN KEY	(dibuat_oleh)	REFERENCES pengguna(kode_pengguna),
+                       FOREIGN KEY	(diubah_oleh)	REFERENCES pengguna(kode_pengguna))";
     $table = mysql_query($sqltext,$link);
     check_mysql_error(mysql_errno(),mysql_error());
 
@@ -43,11 +43,11 @@ function setup_table_fasilitas() {
                        dibuat_oleh        INT(10),
                        diubah_oleh        INT(10),
                        PRIMARY KEY	(kode_pesan),
-                       FOREIGN KEY	(fasilitas)	  REFERENCES fasilitas,
-                       FOREIGN KEY	(pemesan)     REFERENCES pengguna,
-                       FOREIGN KEY	(kode_agenda) REFERENCES agenda,
-                       FOREIGN KEY	(dibuat_oleh) REFERENCES pengguna,
-                       FOREIGN KEY	(diubah_oleh) REFERENCES pengguna)";
+                       FOREIGN KEY	(fasilitas)	  REFERENCES fasilitas(kode_fas),
+                       FOREIGN KEY	(pemesan)     REFERENCES pengguna(kode_pengguna),
+                       FOREIGN KEY	(kode_agenda) REFERENCES agenda(kode_agenda),
+                       FOREIGN KEY	(dibuat_oleh) REFERENCES pengguna(kode_pengguna),
+                       FOREIGN KEY	(diubah_oleh) REFERENCES pengguna(kode_pengguna))";
     $table = mysql_query($sqltext,$link);
     check_mysql_error(mysql_errno(),mysql_error());
 

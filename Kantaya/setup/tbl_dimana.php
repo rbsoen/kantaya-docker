@@ -16,8 +16,8 @@ function setup_table_dimana() {
                        dibuat_oleh	      INT(10),
                        diubah_oleh        INT(10),
                        PRIMARY KEY	(kode_pengguna),
-                       FOREIGN KEY	(dibuat_oleh)	REFERENCES pengguna,
-                       FOREIGN KEY	(diubah_oleh)	REFERENCES pengguna)";
+                       FOREIGN KEY	(dibuat_oleh)	REFERENCES pengguna(kode_pengguna),
+                       FOREIGN KEY	(diubah_oleh)	REFERENCES pengguna(kode_pengguna))";
     $table = mysql_query($sqltext,$link);
     check_mysql_error(mysql_errno(),mysql_error());
 

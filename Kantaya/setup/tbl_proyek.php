@@ -95,7 +95,7 @@ function setup_table_proyek() {
                        tgl_dibuat          datetime,
                        diubah_oleh         integer,
                        tgl_diubah          datetime,
-                       primary key (kode_proyek, no_kegiatan))";
+                       primary key (no_kegiatan))";
 
     $table = mysql_query($sqltext,$link);
     check_mysql_error(mysql_errno(),mysql_error());
@@ -195,11 +195,11 @@ function setup_table_proyek() {
                        dibuat_oleh        INT(10),
                        diubah_oleh        INT(10),
                        PRIMARY KEY (kode_proyek,no_kegiatan,tgl_kegiatan,kode_personil),
-                       FOREIGN KEY (kode_proyek) REFERENCES proyek,
-                       FOREIGN KEY (kode_personil) REFERENCES pengguna,
-                       FOREIGN KEY (no_kegiatan) REFERENCES jadwal_proyek,
-                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna,
-                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna)";
+                       FOREIGN KEY (kode_proyek) REFERENCES proyek(kode_proyek),
+                       FOREIGN KEY (kode_personil) REFERENCES pengguna(kode_pengguna),
+                       FOREIGN KEY (no_kegiatan) REFERENCES jadwal_proyek(no_kegiatan),
+                       FOREIGN KEY (dibuat_oleh) REFERENCES pengguna(kode_pengguna),
+                       FOREIGN KEY (diubah_oleh) REFERENCES pengguna(kode_pengguna))";
     $table = mysql_query($sqltext,$link);
     check_mysql_error(mysql_errno(),mysql_error());
 

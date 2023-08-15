@@ -7,21 +7,18 @@ Dibuat    :	20-10-2001
  Oleh     : KB
  
 Revisi 1	:	
- Tgl.     :
- Oleh     :
- Revisi   :
+ Tgl.     : 17-08-2021
+ Oleh     : rbsoen
+ Revisi   : gunakan konfigurasi dalam cfg/kantaya.cfg
 
 ******************************************/
 
-$db="kantaya";
-$host="localhost";
-$username="root";
-$password="";
+require("../cfg/kantaya.cfg");
 
-if (!$dbh=mysql_connect($host, $username, $password))
+if (!$dbh=mysql_connect($db_host, $db_user, $db_pswd))
   {
     echo mysql_error();
   }
 
-mysql_select_db($db, $dbh);
+mysql_select_db($db_database, $dbh);
 ?>

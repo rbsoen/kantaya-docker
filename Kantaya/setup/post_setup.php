@@ -16,6 +16,27 @@ echo "<td class='judul1' colspan=2>Proses Instalasi Kantaya</td>\n";
 echo "</tr>\n";
 echo "</table><br>\n";
 
+$host = $_POST['host'];
+$root = $_POST['root'];
+$password = $_POST['password'];
+
+$nama_user = $_POST['nama_user'];
+$pswd_user = $_POST['pswd_user'];
+$nama_database = $_POST['nama_database'];
+
+$nama_perusahaan = $_POST['nama_perusahaan'];
+$alamat_perusahaan = $_POST['alamat_perusahaan'];
+$telp_perusahaan = $_POST['telp_perusahaan'];
+$fax_perusahaan = $_POST['fax_perusahaan'];
+$email_perusahaan = $_POST['email_perusahaan'];
+$url_perusahaan = $_POST['url_perusahaan'];
+
+$logo_perusahaan = $_FILES['logo_perusahaan'];
+$logo_perusahaan_type = $logo_perusahaan['type'];
+$logo_perusahaan_name = $logo_perusahaan['name'];
+
+$basepath = $_POST['basepath'];
+
 $link = mysql_connect($host,$root,$password) or die('Tidak dapat Koneksi Ke $root@$host<br>');
 echo "Koneksi Ke $root@$host Sukses<br>\n";
 
@@ -55,10 +76,10 @@ if (!eregi("^image/",$logo_perusahaan_type)) {
     tampilkan_error('',$errtext);
 }
 
-if (!is_uploaded_file($logo_perusahaan)) {
+/*if (!is_uploaded_file($logo_perusahaan)) {
     $errtext = "File Logo tidak dapat diupload";
     tampilkan_error('',$errtext);
-}
+}*/
 
 if (!is_writable("/$basepath/cfg")) {
     chmod("/$basepath/cfg", 0755);
@@ -69,31 +90,31 @@ if (!is_writable("/$basepath/cfg")) {
     tampilkan_error('',$errtext);
 }
 
-echo "Pembuatan Mysql User : $nama_user dengan lokasi $host<br>\n";
+/*echo "Pembuatan Mysql User : $nama_user dengan lokasi $host<br>\n";
 create_mysqluser($link, $nama_user, $pswd_user, $host);
 
 echo "Pembuatan Mysql User Priviledges<br>\n";
 create_user_priv($nama_user, $host, $nama_database);
-
+*/
 mysql_close($link);
 
 $link = mysql_connect($host,$nama_user,$pswd_user) or die('Tidak dapat Koneksi ke $nama_user@$host<br>');
 echo "Koneksi Ke $nama_user@$host Sukses<br>\n";
 
-echo "Pembuatan Mysql Kanataya Database : $nama_database<br>\n";
+/*echo "Pembuatan Mysql Kanataya Database : $nama_database<br>\n";
 create_mysqldb($nama_database);
-
+*/
 echo "Pembuatan Table-Table Kantaya<br>\n";
 create_table_kantaya($nama_database);
 
 echo "Insert Profile Perusahaan<br>\n";
 insert_profile_perusahaan();
 
-echo "Insert Unit Kerja<br>\n";
-insert_unit_kerja();
-
 echo "Insert Administrator<br>\n";
 insert_admin();
+
+echo "Insert Unit Kerja<br>\n";
+insert_unit_kerja();
 
 echo "Pembuatan Konfigurasi File<br>\n";
 create_dbconfig_file($nama_user, $pswd_user, $host, $nama_database);
@@ -214,7 +235,7 @@ function insert_profile_perusahaan() {
     $delete = mysql_query($sqldelete, $link);
     check_mysql_error(mysql_errno(),mysql_error());
     $sqlinsert = "insert into profile_perusahaan(nama_perusahaan, alamat, telp, fax, email, url, logo, tanggal_dibuat, dibuat_oleh) ";
-    $sqlinsert .= "values('$nama_perusahaan','$alamat_perusahaan','$telp_perusahaan','$fax_perusahaan','$email_perusahaan', '$url_perusahaan', '$logo_file', now(), '1')";
+    $sqlinsert .= "values('$nama_perusahaan','$alamat_perusahaan','$telp_perusahaan','$fax_perusahaan','$email_perusahaan', '$url_perusahaan', '$logo_file', now(), 1)";
     $insert = mysql_query($sqlinsert, $link);
     check_mysql_error(mysql_errno(),mysql_error());
 }
@@ -222,7 +243,7 @@ function insert_profile_perusahaan() {
 function insert_unit_kerja() {
     global $nama_perusahaan, $link;
     $sqlinsert = "insert into unit_kerja(kode_unit, nama_unit, tanggal_dibuat, dibuat_oleh) ";
-    $sqlinsert .= "values('0000000000', '$nama_perusahaan', now(), '1')";
+    $sqlinsert .= "values('0000000000', '$nama_perusahaan', now(), 1)";
     $insert = mysql_query($sqlinsert, $link);
     check_mysql_error(mysql_errno(),mysql_error());
 }
@@ -230,7 +251,7 @@ function insert_unit_kerja() {
 function insert_admin() {
     global $link;
     $sqlinsert = "insert into pengguna(nama_pengguna, level, username, password, unit_kerja, tanggal_dibuat, dibuat_oleh) ";
-    $sqlinsert .= "values('Administrator', '1', 'administrator', 'root', '0000000000', now(), '1')";
+    $sqlinsert .= "values('Administrator', '1', 'administrator', 'root', '0000000000', now(), 1)";
     $insert = mysql_query($sqlinsert, $link);
     check_mysql_error(mysql_errno(),mysql_error());
 }

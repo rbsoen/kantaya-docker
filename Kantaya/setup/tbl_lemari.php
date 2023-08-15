@@ -8,7 +8,7 @@ function setup_table_lemari() {
 
     echo "create table direktori<br>\n";
     $sqltext = "create table direktori (
-                       kode_direktori     int(10)         NOT NULL DEFAULT '0' AUTO_INCREMENT,
+                       kode_direktori     int(10)         NOT NULL AUTO_INCREMENT,
                        nama_direktori     varchar(30)     NOT NULL,
                        direktori_induk    int(10),
                        keterangan         varchar(120),
@@ -16,16 +16,17 @@ function setup_table_lemari() {
                        tanggal_dibuat     date            NOT NULL,
                        tanggal_diubah     date,
                        dibuat_oleh        int(10)         NOT NULL,
+                       pemilik        int(10)         NOT NULL,
                        diubah_oleh        int(10),
                        PRIMARY KEY (kode_direktori),
-                       FOREIGN KEY (direktori_induk) REFERENCES direktori ON DELETE cascade,
-                       FOREIGN KEY (pemilik) REFERENCES pengguna ON DELETE cascade)";
+                       FOREIGN KEY (direktori_induk) REFERENCES direktori(kode_direktori) ON DELETE cascade,
+                       FOREIGN KEY (pemilik) REFERENCES pengguna(kode_pengguna) ON DELETE cascade)";
     $table = mysql_query($sqltext,$link);
     check_mysql_error(mysql_errno(),mysql_error());
 
     echo "create table file_tb<br>\n";
     $sqltext = "create table file_tb (
-                       kode_file          int(10)         NOT NULL DEFAULT '0' AUTO_INCREMENT,
+                       kode_file          int(10)         NOT NULL AUTO_INCREMENT,
                        nama_file          varchar(30)     NOT NULL,
                        ukuran_file        int(10)         NOT NULL,
                        kata_kunci         varchar(60),
@@ -37,7 +38,7 @@ function setup_table_lemari() {
                        dibuat_oleh        int(10)         NOT NULL,
                        diubah_oleh        int(10),
                        PRIMARY KEY (kode_file),
-                       FOREIGN KEY (direktori) REFERENCES direktori ON DELETE cascade)";
+                       FOREIGN KEY (direktori) REFERENCES direktori(kode_direktori) ON DELETE cascade)";
     $table = mysql_query($sqltext,$link);
     check_mysql_error(mysql_errno(),mysql_error());
 
@@ -46,8 +47,8 @@ function setup_table_lemari() {
                        kode_direktori     int(10)         NOT NULL,
                        kode_pengguna      int(10)         NOT NULL,
                        PRIMARY KEY (kode_direktori, kode_pengguna),
-                       FOREIGN KEY (kode_direktori) REFERENCES direktori ON DELETE cascade,
-                       FOREIGN KEY (kode_pengguna) REFERENCES pengguna ON DELETE cascade)";
+                       FOREIGN KEY (kode_direktori) REFERENCES direktori(kode_direktori) ON DELETE cascade,
+                       FOREIGN KEY (kode_pengguna) REFERENCES pengguna(kode_pengguna) ON DELETE cascade)";
     $table = mysql_query($sqltext,$link);
     check_mysql_error(mysql_errno(),mysql_error());
 
@@ -56,8 +57,8 @@ function setup_table_lemari() {
                        kode_direktori     int(10)         NOT NULL,
                        kode_grup          int(10)         NOT NULL,
                        PRIMARY KEY (kode_direktori, kode_grup),
-                       FOREIGN KEY (kode_direktori) REFERENCES direktori ON DELETE cascade,
-                       FOREIGN KEY (kode_grup) REFERENCES grup ON DELETE cascade)";
+                       FOREIGN KEY (kode_direktori) REFERENCES direktori(kode_direktori) ON DELETE cascade,
+                       FOREIGN KEY (kode_grup) REFERENCES grup(kode_grup) ON DELETE cascade)";
     $table = mysql_query($sqltext,$link);
     check_mysql_error(mysql_errno(),mysql_error());
 
@@ -66,8 +67,8 @@ function setup_table_lemari() {
                        kode_direktori     int(10)         NOT NULL,
                        kode_unit          int(10)         NOT NULL,
                        PRIMARY KEY (kode_direktori, kode_unit),
-                       FOREIGN KEY (kode_direktori) REFERENCES direktori ON DELETE cascade,
-                       FOREIGN KEY (kode_unit) REFERENCES  unit_kerja ON DELETE cascade)";
+                       FOREIGN KEY (kode_direktori) REFERENCES direktori(kode_direktori) ON DELETE cascade,
+                       FOREIGN KEY (kode_unit) REFERENCES  unit_kerja(kode_unit) ON DELETE cascade)";
     $table = mysql_query($sqltext,$link);
     check_mysql_error(mysql_errno(),mysql_error());
 
