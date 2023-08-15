@@ -23,6 +23,20 @@ function openurl(urlpath,tgt)
 <body>
 
 <?php
+
+$tanggal = $_POST["tanggal"];
+$hmb = $_POST["hmb"];
+$pemilik = $_POST["pemilik"];
+$judul = $_POST["judul"];
+$status = $_POST["status"];
+$ptgl = $_POST["ptgl"];
+$pbln = $_POST["pbln"];
+$pthn = $_POST["pthn"];
+$batas_akhir = $_POST["batas_akhir"];
+$kode_dikerjakan = $_POST["kode_dikerjakan"];
+$deskripsi = $_POST["deskripsi"];
+$modus = $_POST["modus"];
+
 echo "<div><center><p><br><br></p><p><br><br>";
 if ($modus !== 'Hapus' and $judul == '' ) {
 	 $msg = "Judul tidak boleh kosong !";
@@ -37,23 +51,24 @@ if ($modus !== 'Hapus' and $judul == '' ) {
 						$msg = 'Tugas segera dikerjakan: <b>'.$judul.'</b>, berhasil dihapus';
 						break;
 			 case 'Ubah' :
-			 			if ($batas_akhir == 'ON') {$tgl_berakhir = $pthn."-".$pbln."-".$ptgl;}
-						else {$tgl_berakhir = '';}
+			 			if ($batas_akhir == 'ON') {$tgl_berakhir = "'".$pthn."-".$pbln."-".$ptgl."'";}
+						else {$tgl_berakhir = 'NULL';}
 						$query  = "UPDATE segera_dikerjakan SET ";
 						$query .= "judul = '$judul', ";
 						$query .= "status = '$status', ";
-						$query .= "tgl_berakhir = '$tgl_berakhir', ";
+						$query .= "tgl_berakhir = $tgl_berakhir, ";
 						$query .= "deskripsi = '$deskripsi', ";
 						$query .= "tgl_diubah = curdate() ";
 						$query .= "where kode_dikerjakan = $kode_dikerjakan";
 						$msg = 'Data tugas segera dikerjakan: <b>'.$judul.'</b>, berhasil diubah';
 						break;
 			 case 'Simpan' :
-			 			if ($batas_akhir == 'ON') {$tgl_berakhir = $pthn."-".$pbln."-".$ptgl;}
+			 			if ($batas_akhir == 'ON') {$tgl_berakhir = "'".$pthn."-".$pbln."-".$ptgl."'";}
 						else {$tgl_berakhir = 'NULL';}
 			 			$query  = "INSERT INTO segera_dikerjakan ";
-						$query .= "VALUES ('', $pemilik, '$judul', '$status', '$tgl_berakhir', ";
-						$query .= "'$deskripsi', curdate(), '')";
+			 			$query .= "(kode_agenda, pemilik, judul, status, tgl_berakhir, deskripsi, tgl_dibuat) ";
+						$query .= "VALUES (-1, $pemilik, '$judul', '$status', $tgl_berakhir, ";
+						$query .= "'$deskripsi', curdate())";
 						$msg = 'Tugas segera dikerjakan: <b>'.$judul.'</b>, berhasil ditambahkan';
 			 			break;
    }

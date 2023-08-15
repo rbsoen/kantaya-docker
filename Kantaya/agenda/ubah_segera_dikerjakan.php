@@ -14,7 +14,11 @@ echo "
 </head>
 ";
 
-$hsl = mysql_query("select * from segera_dikerjakan where kode_dikerjakan = $kode_dikerjakan");
+$hmb = $_GET["hmb"];
+$kode_dikerjakan = $_GET["kode_dikerjakan"];
+$tanggal = $_GET["tanggal"];
+
+$hsl = mysql_query("select * from segera_dikerjakan where kode_dikerjakan = '$kode_dikerjakan';");
 if (!$hsl) {echo mysql_error();}
 $dat = @mysql_fetch_row($hsl);
 $dat = explode("·",ereg_replace("'","&#39;",htmlspecialchars(implode("·",$dat))));
@@ -27,8 +31,8 @@ echo"
  <form name=form1 method=post action='olah_sgr_dikrj.php'>
    <input type=hidden name='tanggal' value='$tanggal'>
    <input type=hidden name='hmb' value='$hmb'>
-	 <input type=hidden name='kode_dikerjakan' value=$dat[0]>
-   <input type=hidden name='pemilik' value=$dat[1]>
+	 <input type=hidden name='kode_dikerjakan' value=$dat[1]>
+   <input type=hidden name='pemilik' value=$dat[2]>
   <center>
   <table border=1 width=100% cellpadding=4 cellspacing=0>
     <tr>
@@ -46,11 +50,11 @@ echo"
             </tr>
             <tr>
               <td>
-<input type=text name=judul value='$dat[2]' size=35></td>
+<input type=text name=judul value='$dat[3]' size=35></td>
               <td><select size=1 name='status'>";
-										$slctd = ''; if ($dat[3]=='Selesai') {$slctd = 'selected';}
+										$slctd = ''; if ($dat[4]=='Selesai') {$slctd = 'selected';}
 echo "       				<option ".$slctd.">Selesai</option>";
-										$slctd = ''; if ($dat[3]=='Dalam Pengerjaan') {$slctd = 'selected';}
+										$slctd = ''; if ($dat[4]=='Dalam Pengerjaan') {$slctd = 'selected';}
 echo "       				<option ".$slctd.">Dalam Pengerjaan</option>
                 </select></td>
             </tr>
@@ -60,14 +64,14 @@ echo "       				<option ".$slctd.">Dalam Pengerjaan</option>
             </tr>
             <tr>
               <td>";
-							if ($dat[4]=='0000-00-00') {$dgnbatas = ''; $tnpbatas = 'checked';}
+							if ($dat[5]=='') {$dgnbatas = ''; $tnpbatas = 'checked';}
 							else {$dgnbatas = 'checked'; $tnpbatas = '';}
 echo"
 		 					<input type=radio value=ON $dgnbatas name='batas_akhir'>
 										<select size=1 name='ptgl'>";
 				for ($i=1; $i<=31; $i++) {
 						$slctd = ''; 
-						if ($i==substr($dat[4],8,2)) {$slctd = 'selected';}
+						if ($i==substr($dat[5],8,2)) {$slctd = 'selected';}
 echo"					<option ".$slctd." value=".$i.">".$i;
 				}
 echo"
@@ -76,7 +80,7 @@ echo"
 		";
 				for ($i=1; $i<=12; $i++) {
 						$slctd = '';
-						if ($i==substr($dat[4],5,2)) {$slctd = 'selected';}
+						if ($i==substr($dat[5],5,2)) {$slctd = 'selected';}
 						$nmbln = namabulan("S", $i);
 echo"					<option ".$slctd." value=".$i.">".$nmbln;
 				}
@@ -86,7 +90,7 @@ echo"
 ";
 				for ($i=date("Y"); $i<=date("Y")+1; $i++) {
 						$slctd = '';
-						if ($i==substr($dat[4],0,4)) {$slctd = 'selected';}
+						if ($i==substr($dat[5],0,4)) {$slctd = 'selected';}
 echo"					<option ".$slctd." value=".$i.">".$i;
 				}
 echo"
@@ -102,7 +106,7 @@ echo"
              
               </td>
               <td>
-                  <p><textarea rows=5 name='deskripsi' cols=30>$dat[5]</textarea></p>
+                  <p><textarea rows=5 name='deskripsi' cols=30>$dat[6]</textarea></p>
   
                 <p>&nbsp;</td>
             </tr>
