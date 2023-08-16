@@ -60,3 +60,16 @@ Fitur-fitur yang telah diperbaiki:
 - [ ] Surat
 - [ ] URL Link (tabel hilang)
 - [ ] Profil Pengguna
+
+## Lisensi
+
+Software ini diasumsikan berlisensi GPL v2 berdasarkan [pernyataan direktur P3TIE-BPPT](https://www.mail-archive.com/asosiasi-warnet@yahoogroups.com/msg13182.html). Dengan demikian, modifikasi ini berlisensi sama, termasuk perlengkapan Docker-isasinya (`Dockerfile`, `docker-compose.yml`).
+
+```
+Hak cipta © 2001 P3TIE-BPPT
+
+Program ini adalah perangkat lunak bebas; Anda dapat menyebarluaskannya
+dan/atau memodifikasinya di bawah ketentuan-ketentuan dari GNU General Public
+License sebagaimana yang diterbitkan oleh Free Software Foundation; baik versi
+2 dari Lisensi tersebut, atau (atas pilihan Anda) versi yang lebih baru.
+```
